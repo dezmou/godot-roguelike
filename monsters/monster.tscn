@@ -3,19 +3,20 @@
 [ext_resource type="Script" path="res://monsters/monster.gd" id="1_hs6y5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f5kpd"]
-radius = 32.0624
+radius = 15.0333
 
 [node name="Monster" type="RigidBody2D"]
 collision_layer = 0
-collision_mask = 0
+collision_mask = 256
+lock_rotation = true
 script = ExtResource("1_hs6y5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_f5kpd")
 
 [node name="playerColor" type="ColorRect" parent="."]
-offset_left = -30.0
-offset_top = -30.0
-offset_right = 32.0
-offset_bottom = 31.0
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 17.0
+offset_bottom = 16.0
 color = Color(0.470588, 0.470588, 0.470588, 0.454902)

@@ -11,7 +11,7 @@ var allMonsters : Dictionary = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in range(10):
+	for i in range(40):
 		var knife = Knife.instantiate()
 		var player = Player.YOU if i % 2 == 0 else Player.BOT
 		knife.init(player)

@@ -1,6 +1,48 @@
-[gd_scene load_steps=2 format=3 uid="uid://b08fhvepmg6dp"]
+[gd_scene load_steps=6 format=3 uid="uid://b08fhvepmg6dp"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_rgajw"]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_vsie0"]
+b = Vector2(0, 1000)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_yff18"]
+b = Vector2(600, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ao2oa"]
+a = Vector2(0, 1000)
+b = Vector2(600, 1000)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ixvhm"]
+a = Vector2(600, 0)
+b = Vector2(600, 1000)
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_rgajw")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_vsie0")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("SegmentShape2D_yff18")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("SegmentShape2D_ao2oa")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D4"]
+shape = SubResource("SegmentShape2D_ixvhm")
