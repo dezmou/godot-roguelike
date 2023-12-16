@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqaxu668bw6mt"]
+
+[ext_resource type="Script" path="res://monsters/monster.gd" id="1_hs6y5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f5kpd"]
+radius = 32.0624
+
+[node name="Monster" type="RigidBody2D"]
+script = ExtResource("1_hs6y5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_f5kpd")

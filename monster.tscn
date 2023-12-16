@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmq32it0o1bdk"]
-
-[ext_resource type="Script" path="res://Monster.gd" id="1_cifsx"]
-
-[node name="Monster" type="RigidBody2D"]
-script = ExtResource("1_cifsx")
