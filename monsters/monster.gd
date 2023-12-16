@@ -21,7 +21,15 @@ func _ready():
 	timer.one_shot = false
 	timer.timeout.connect(_checkTarget)
 	timer.start()
+	
+	
+	#($Hitbox as Area2D).
+	#($Hitbox as Area2D).monitoring = true
+	($Hitbox as Area2D).area_entered.connect(_onMeet)
 
+
+func _onMeet(body):
+	print("MEEET")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -41,7 +49,5 @@ func findNearestEnnemy():
 	return minTarget
 
 func _physics_process(delta):
-	#var target = findNearestEnnemy()
-	#var force = position.direction_to(screen_center) * position.distance_to(screen_center) * 2.
-	var force = position.direction_to(currentTargetPosition) * 100
+	var force = position.direction_to(currentTargetPosition) * 200
 	apply_central_force(force)
