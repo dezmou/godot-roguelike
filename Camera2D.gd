@@ -18,7 +18,7 @@ func _ready():
 
 func _process(delta):
 	zoom += (targetZoom - zoom) * 0.02
-	position += (targetCenter - position) * 0.1
+	position += (targetCenter - position) * 0.01
 
 func calculate_bounds():
 	var posMax := Vector2(0,0)
@@ -32,9 +32,8 @@ func calculate_bounds():
 			posMin.x = node.position.x
 		if node.position.y < posMin.y:
 			posMin.y = node.position.y
-	var center = (Vector2(posMin.x, posMin.y) + Vector2(posMax.x, posMax.y)) / 2
+	targetCenter = (Vector2(posMin.x, posMin.y) + Vector2(posMax.x, posMax.y)) / 2
 	var scale_x := 600 / (posMax.x - posMin.x)
 	var scale_y := 1000 / (posMax.y - posMin.y)
-	var factor = min(min(scale_x, scale_y) * 0.7, 1.5)
-	print(factor)
+	var factor = min(min(scale_x, scale_y) * 0.7, 1.2)
 	targetZoom = Vector2(factor, factor)
