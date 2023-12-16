@@ -12,6 +12,12 @@ var currentTargetPosition = Vector2(500,1000)
 func init(newPlayer : Types.Player):
 	player = newPlayer
 	$playerColor.color = Color(0.7,0.2,0.1,0.5) if player == Types.Player.BOT else  Color(0.2,0.7,0.1,0.5)
+	if newPlayer == Types.Player.BOT:
+		$Hitbox.set_collision_layer_value(1, true)
+		$Hitbox.set_collision_mask_value(2,true)
+	else:
+		$Hitbox.set_collision_layer_value(2, true)
+		$Hitbox.set_collision_mask_value(1,true)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,16 +28,13 @@ func _ready():
 	timer.timeout.connect(_checkTarget)
 	timer.start()
 	
-	
-	#($Hitbox as Area2D).
-	#($Hitbox as Area2D).monitoring = true
 	($Hitbox as Area2D).area_entered.connect(_onMeet)
 
 
 func _onMeet(body):
-	print("MEEET")
+	var target = body.get_parent()
+	apply_central_impulse(position.direction_to(target.position) * 500 * -1)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
@@ -49,5 +52,8 @@ func findNearestEnnemy():
 	return minTarget
 
 func _physics_process(delta):
-	var force = position.direction_to(currentTargetPosition) * 200
+	var force = position.direction_to(currentTargetPosition) * 600
+	if position.distance_to(currentTargetPosition) < 30:
+		force *= 4
+	force += position.direction_to(Vector2( 300,500)) * 100;
 	apply_central_force(force)
