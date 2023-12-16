@@ -1,6 +1,6 @@
 extends Node2D
 
-const NB_MONSTER = 80
+const NB_MONSTER = 10
 
 const Knife = preload("res://monsters/knife/knife.tscn")
 
@@ -11,6 +11,13 @@ var allMonsters  := {
 	Player.BOT : {},
 	Player.YOU : {}
 }
+
+func getAllMonsters() -> Array[RigidBody2D]:
+	var res : Array[RigidBody2D] = [];
+	res.assign(allMonsters[Player.BOT].values() + allMonsters[Player.YOU].values())
+	return res
+	
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

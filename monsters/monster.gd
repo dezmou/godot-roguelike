@@ -9,6 +9,7 @@ var player : Types.Player = Types.Player.YOU
 
 var currentTargetPosition = Vector2(500,1000)
 
+
 func init(newPlayer : Types.Player):
 	player = newPlayer
 	$playerColor.color = Color(0.7,0.2,0.1,0.5) if player == Types.Player.BOT else  Color(0.2,0.7,0.1,0.5)
@@ -33,7 +34,7 @@ func _ready():
 
 func _onMeet(body):
 	var target = body.get_parent()
-	apply_central_impulse(position.direction_to(target.position) * 500 * -1)
+	apply_central_impulse(position.direction_to(target.position) * 400 * -1)
 
 func _process(delta):
 	pass
