@@ -17,8 +17,8 @@ func _ready():
 
 
 func _process(delta):
-	zoom += (targetZoom - zoom) * 0.02
-	position += (targetCenter - position) * 0.01
+	zoom += (targetZoom - zoom) * 0.003
+	position += (targetCenter - position) * 0.002
 
 func calculate_bounds():
 	var posMax := Vector2(0,0)

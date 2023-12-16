@@ -53,12 +53,12 @@ func findNearestEnnemy():
 			minTarget = ennemy.position
 	return minTarget
 
-#var max_speed = 600  # Maximum speed
-#func _integrate_forces(state):
-	#var velocity = state.get_linear_velocity()
-	#if velocity.length() > max_speed:
-		#velocity = velocity.normalized() * max_speed
-		#state.set_linear_velocity(velocity)
+var max_speed = 600  # Maximum speed
+func _integrate_forces(state):
+	var velocity = state.get_linear_velocity()
+	if velocity.length() > max_speed:
+		velocity = velocity.normalized() * max_speed
+		state.set_linear_velocity(velocity)
 
 func _physics_process(delta):
 	var force = position.direction_to(currentTargetPosition) * 600
