@@ -6,13 +6,10 @@ const Types = preload("res://Main.gd")
 var health = 10
 var type = "base"
 var player : Types.Player = Types.Player.YOU
-
 var currentTargetPosition = Vector2(500,1000)
-
 
 func init(newPlayer : Types.Player):
 	player = newPlayer
-	$playerColor.color = Color(0.7,0.2,0.1,0.5) if player == Types.Player.BOT else  Color(0.2,0.7,0.1,0.5)
 	if newPlayer == Types.Player.BOT:
 		$Hitbox.set_collision_layer_value(1, true)
 		$Hitbox.set_collision_mask_value(2,true)
@@ -35,7 +32,6 @@ func _ready():
 func _onMeet(body):
 	var target = body.get_parent()
 	apply_central_impulse(position.direction_to(target.position) * 400 * -1)
-	#apply_central_impulse(position.direction_to(target.position) * 1200 * -1)
 
 func _process(delta):
 	pass
@@ -53,17 +49,11 @@ func findNearestEnnemy():
 			minTarget = ennemy.position
 	return minTarget
 
-var max_speed = 600  # Maximum speed
-func _integrate_forces(state):
-	var velocity = state.get_linear_velocity()
-	if velocity.length() > max_speed:
-		velocity = velocity.normalized() * max_speed
-		state.set_linear_velocity(velocity)
 
 func _physics_process(delta):
 	var force = position.direction_to(currentTargetPosition) * 600
 	if position.distance_to(currentTargetPosition) < 30:
 		force *= 4
 	var center = Vector2(300,500)
-	force += position.direction_to(center) * (position.distance_to(center) * 0.5);
+	force += position.direction_to(center) * 200;
 	apply_central_force(force)

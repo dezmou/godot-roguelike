@@ -1,6 +1,6 @@
 extends Node2D
 
-const NB_MONSTER = 150
+const NB_MONSTER = 50
 
 const Knife = preload("res://monsters/knife/knife.tscn")
 

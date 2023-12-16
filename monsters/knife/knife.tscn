@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://bqaxu668bw6mt" path="res://monsters/monster.tscn" id="1_xq0mk"]
 [ext_resource type="Script" path="res://monsters/knife/knife.gd" id="2_7l3ug"]
-[ext_resource type="Texture2D" uid="uid://dsa15v7q5mvo2" path="res://art/scissor.png" id="3_ejjo3"]
+[ext_resource type="Texture2D" uid="uid://bebx3b3fc4vss" path="res://art/monster_blue.png" id="3_tojd0"]
 
 [node name="Knife" instance=ExtResource("1_xq0mk")]
 script = ExtResource("2_7l3ug")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
-position = Vector2(-2, 2)
-scale = Vector2(0.0546875, 0.0546875)
-texture = ExtResource("3_ejjo3")
+position = Vector2(0, -1)
+scale = Vector2(0.4375, 0.4375)
+texture = ExtResource("3_tojd0")
