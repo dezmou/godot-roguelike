@@ -31,6 +31,7 @@ func _ready():
 
 func _onMeet(body):
 	var target = body.get_parent()
+	Main.fight(self, target)
 	apply_central_impulse(position.direction_to(target.position) * 400 * -1)
 
 func _process(delta):

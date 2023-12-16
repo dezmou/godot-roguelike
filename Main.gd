@@ -18,7 +18,6 @@ func getAllMonsters() -> Array[RigidBody2D]:
 	return res
 	
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for i in range(NB_MONSTER):
@@ -34,3 +33,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func fight(a:RigidBody2D, b:RigidBody2D):
+	if (a.player == Player.YOU and b.player == Player.BOT):
+		for monster in [a,b]:
+			monster.health += -1
+			if monster.health <= 0:
+				allMonsters[monster.player].erase(monster.get_instance_id())
+				monster.queue_free()
+		
