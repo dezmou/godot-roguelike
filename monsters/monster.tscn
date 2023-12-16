@@ -6,6 +6,8 @@
 radius = 32.0624
 
 [node name="Monster" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_hs6y5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

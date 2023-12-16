@@ -1,15 +1,23 @@
 extends Node2D
-enum Player {YOU, BOT}
-
 const Knife = preload("res://monsters/knife/knife.tscn")
+
+enum Player {YOU, BOT}
+var versus = {Player.YOU : Player.BOT, Player.BOT : Player.YOU}
+
+var allMonsters : Dictionary = {
+	Player.BOT : {},
+	Player.YOU : {}
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in range(2):
+	for i in range(10):
 		var knife = Knife.instantiate()
-		knife.init(Player.YOU if i == 0 else Player.BOT)
-		knife.position.x = 150 * (i + 1)
-		knife.position.y = 300 * (i + 1)
+		var player = Player.YOU if i % 2 == 0 else Player.BOT
+		knife.init(player)
+		knife.position.x = randi_range(0,500)
+		knife.position.y = randi_range(0,1000)
+		allMonsters[player][knife.get_instance_id()] = knife
 		add_child(knife)
 
 
