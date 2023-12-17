@@ -29,21 +29,31 @@ func getAllMonsters() -> Array[RigidBody2D]:
 	
 
 func handleShopButton():
-	get_tree().paused = true
+	$BattleScene.get_tree().paused = true
 	$Shop.visible = true
 	pass
+
+func spawnMonster(player : Player, Monster : PackedScene):
+	var knife = Monster.instantiate()
+	knife.init(player)
+	knife.position.x = randi_range(50,450)
+	knife.position.y = randi_range(50,950)
+	player.monsters[knife.get_instance_id()] = knife
+	$BattleScene.add_child(knife)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Shop.visible = false
 	for i in range(NB_MONSTER):
-		var knife = Knife.instantiate()
-		var player = players[YOU if i % 2 == 0 else BOT]
-		knife.init(player)
-		knife.position.x = randi_range(50,450)
-		knife.position.y = randi_range(50,950)
-		player.monsters[knife.get_instance_id()] = knife
-		add_child(knife)
+		spawnMonster(players[YOU if i % 2 == 0 else BOT], Knife)
+		#var knife = Knife.instantiate()
+		#var player = players[YOU if i % 2 == 0 else BOT]
+		#knife.init(player)
+		#knife.position.x = randi_range(50,450)
+		#knife.position.y = randi_range(50,950)
+		#player.monsters[knife.get_instance_id()] = knife
+		#$BattleScene.add_child(knife)
 
 	$ShopButton.pressed.connect(handleShopButton)
 	$Shop.addMonsterCard(Knife)

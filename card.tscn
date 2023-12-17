@@ -45,3 +45,9 @@ offset_bottom = -176.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "[center]Zouze[/center]"
+
+[node name="ClickArea" type="TextureButton" parent="."]
+offset_left = -112.0
+offset_top = -200.0
+offset_right = 112.0
+offset_bottom = 192.0
