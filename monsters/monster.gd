@@ -1,32 +1,27 @@
 extends RigidBody2D
 
 const BASE_SPEED = 500
-const BASE_IMPULSE_FORCE = 400
+const BASE_IMPULSE_FORCE = 650
 const TO_CENTER_FORCE = 50
 
 const Types = preload("res://Main.gd")
 @onready var Main = get_node("/root/Main")
 
-var health = 100
-var attack = 10
-var precision = 10
+var start_health = 100.0
+var health = start_health
+var attack = 10.0
+var precision = 10.0
 
 var type = "base"
 var player : Types.Player
-var currentTargetPosition = Vector2(500,1000)
+var currentTargetPosition = null
 
 func init(_player):
 	player = _player
 	if player.belong == Types.BOT:
 		set_collision_layer_value(1, true)
 		set_collision_mask_value(2,true)
-
-		$Hitbox.set_collision_layer_value(1, true)
-		$Hitbox.set_collision_mask_value(2,true)
 	else:
-		$Hitbox.set_collision_layer_value(2, true)
-		$Hitbox.set_collision_mask_value(1,true)
-
 		set_collision_layer_value(2, true)
 		set_collision_mask_value(1,true)
 
@@ -39,11 +34,13 @@ func _ready():
 	timer.one_shot = false
 	timer.timeout.connect(_checkTarget)
 	timer.start()
-	
-	($Hitbox as Area2D).area_entered.connect(_onMeet)
+	contact_monitor = true
+	max_contacts_reported = 1
+	body_entered.connect(_onMeet)
 
 func onHit(bully : RigidBody2D):
 	health += -bully.attack
+	$rectHealth.scale.x = health / start_health
 	apply_central_impulse(position.direction_to(bully.position) * BASE_IMPULSE_FORCE * -1)
 	if health <= 0:
 		player.monsters.erase(get_instance_id())
@@ -51,9 +48,8 @@ func onHit(bully : RigidBody2D):
 	
 
 func _onMeet(body):
-	if (player.belong == Types.YOU):
-		var target = body.get_parent()
-		Main.fight(self, target)
+	if (body is RigidBody2D and player.belong == Types.YOU):
+		Main.fight(self, body)
 
 func _process(delta):
 	pass
@@ -63,7 +59,7 @@ func _checkTarget():
 
 func findNearestEnnemy():
 	var min = 99999999
-	var minTarget = Vector2(300,500)
+	var minTarget = null
 	for ennemy in Main.versus(player).monsters.values() as Array[RigidBody2D]:
 	#for ennemy in Main.players[Main.versus[belong]].monsters.values() as Array[RigidBody2D]:
 		var distance = ennemy.position.distance_to(self.position)
@@ -74,9 +70,10 @@ func findNearestEnnemy():
 
 
 func _physics_process(delta):
-	var force = position.direction_to(currentTargetPosition) * BASE_SPEED
-	if position.distance_to(currentTargetPosition) < 50:
-		force *= 2
-	var center = Vector2(300,500)
-	force += position.direction_to(center) * TO_CENTER_FORCE;
-	apply_central_force(force)
+	if (currentTargetPosition):
+		var force = position.direction_to(currentTargetPosition) * BASE_SPEED
+		if position.distance_to(currentTargetPosition) < 50:
+			force *= 2
+		var center = Vector2(300,500)
+		force += position.direction_to(center) * TO_CENTER_FORCE;
+		apply_central_force(force)

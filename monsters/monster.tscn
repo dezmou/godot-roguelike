@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://monsters/monster.gd" id="1_hs6y5"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_b1dmc"]
-radius = 15.0
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ty62n"]
+bounce = 0.05
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f5kpd"]
 radius = 15.0333
@@ -11,17 +11,24 @@ radius = 15.0333
 [node name="Monster" type="RigidBody2D"]
 collision_layer = 0
 collision_mask = 256
+physics_material_override = SubResource("PhysicsMaterial_ty62n")
 lock_rotation = true
 linear_damp = 2.0
 script = ExtResource("1_hs6y5")
 
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("CircleShape2D_b1dmc")
-debug_color = Color(0.960784, 0, 0.509804, 0.419608)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_f5kpd")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -15.0
+offset_top = 15.0
+offset_right = 15.0
+offset_bottom = 18.0
+color = Color(0.866667, 0.0980392, 0.270588, 1)
+
+[node name="rectHealth" type="ColorRect" parent="."]
+offset_left = -15.0
+offset_top = 15.0
+offset_right = 15.0
+offset_bottom = 18.0
+color = Color(0, 0.556863, 0.345098, 1)

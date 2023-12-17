@@ -55,17 +55,4 @@ func fight(a:RigidBody2D, b:RigidBody2D):
 		winner = b
 		loser = a
 	loser.onHit(winner)
-	#loser.health += -winner.attack;
-	#loser.impulseFrom(winner)
-	#for monster in [a,b]:
-		#if monster.health <= 0:
-			#monster.player.monsters.erase(monster.get_instance_id())
-			#monster.queue_free()
-
-	#if (a.player.belong == YOU and b.player.belong == BOT):
-		#for monster in [a,b]:
-			#monster.health += -1
-			#if monster.health <= 0:
-				#monster.player.monsters.erase(monster.get_instance_id())
-				#monster.queue_free()
 		
