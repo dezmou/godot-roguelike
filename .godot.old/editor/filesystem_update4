@@ -1,0 +1,12 @@
+res://main.tscn
+res://monster.tscn
+res://Monster.gd
+res://soldier.tscn
+res://soldier.gd
+res://monsters/monster.tscn
+res://monsters/knife/knife.tscn
+res://monsters/monster.gd
+res://Main.gd
+res://monsters/knife/knife.gd
+res://Camera2D.gd
+res://Player.gd

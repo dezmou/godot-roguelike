@@ -54,12 +54,13 @@ func fight(a:RigidBody2D, b:RigidBody2D):
 	if randi_range(0,a.precision + b.precision) > a.precision:
 		winner = b
 		loser = a
-	loser.health += -winner.attack;
-	loser.impulseFrom(winner)
-	for monster in [a,b]:
-		if monster.health <= 0:
-			monster.player.monsters.erase(monster.get_instance_id())
-			monster.queue_free()
+	loser.onHit(winner)
+	#loser.health += -winner.attack;
+	#loser.impulseFrom(winner)
+	#for monster in [a,b]:
+		#if monster.health <= 0:
+			#monster.player.monsters.erase(monster.get_instance_id())
+			#monster.queue_free()
 
 	#if (a.player.belong == YOU and b.player.belong == BOT):
 		#for monster in [a,b]:

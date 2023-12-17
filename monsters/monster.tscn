@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://monsters/monster.gd" id="1_hs6y5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b1dmc"]
-radius = 11.0
+radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f5kpd"]
 radius = 15.0333

@@ -18,11 +18,18 @@ var currentTargetPosition = Vector2(500,1000)
 func init(_player):
 	player = _player
 	if player.belong == Types.BOT:
+		set_collision_layer_value(1, true)
+		set_collision_mask_value(2,true)
+
 		$Hitbox.set_collision_layer_value(1, true)
 		$Hitbox.set_collision_mask_value(2,true)
 	else:
 		$Hitbox.set_collision_layer_value(2, true)
 		$Hitbox.set_collision_mask_value(1,true)
+
+		set_collision_layer_value(2, true)
+		set_collision_mask_value(1,true)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,8 +42,13 @@ func _ready():
 	
 	($Hitbox as Area2D).area_entered.connect(_onMeet)
 
-func impulseFrom(target : RigidBody2D):
-	apply_central_impulse(position.direction_to(target.position) * BASE_IMPULSE_FORCE * -1)
+func onHit(bully : RigidBody2D):
+	health += -bully.attack
+	apply_central_impulse(position.direction_to(bully.position) * BASE_IMPULSE_FORCE * -1)
+	if health <= 0:
+		player.monsters.erase(get_instance_id())
+		queue_free()
+	
 
 func _onMeet(body):
 	if (player.belong == Types.YOU):
@@ -63,8 +75,8 @@ func findNearestEnnemy():
 
 func _physics_process(delta):
 	var force = position.direction_to(currentTargetPosition) * BASE_SPEED
-	#if position.distance_to(currentTargetPosition) < 50:
-		#force *= 8
+	if position.distance_to(currentTargetPosition) < 50:
+		force *= 2
 	var center = Vector2(300,500)
 	force += position.direction_to(center) * TO_CENTER_FORCE;
 	apply_central_force(force)
