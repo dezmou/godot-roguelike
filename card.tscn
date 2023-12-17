@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://3dhfqbjfk0nv"]
+
+[ext_resource type="Texture2D" uid="uid://budox0xno7ddb" path="res://art/knife_card.png" id="1_h1f7j"]
+
+[node name="Card" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -112.0
+offset_top = -192.0
+offset_right = 112.0
+offset_bottom = 192.0
+color = Color(0.584314, 0.447059, 0.282353, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="ColorRect"]
+position = Vector2(112, 104)
+scale = Vector2(0.203125, 0.1875)
+texture = ExtResource("1_h1f7j")
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 248.0
+offset_right = 216.0
+offset_bottom = 376.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/ColorRect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 200.0
+offset_bottom = 120.0
+text = "No special effect"

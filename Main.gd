@@ -1,6 +1,6 @@
 extends Node2D
 
-const NB_MONSTER = 50
+const NB_MONSTER = 40
 
 const Knife = preload("res://monsters/knife/knife.tscn")
 enum {YOU, BOT}
@@ -26,8 +26,14 @@ func getAllMonsters() -> Array[RigidBody2D]:
 	return res
 	
 
+func handleShopButton():
+	get_tree().paused = true
+	$Shop.visible = true
+	pass
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Shop.visible = false
 	for i in range(NB_MONSTER):
 		var knife = Knife.instantiate()
 		var player = players[YOU if i % 2 == 0 else BOT]
@@ -37,7 +43,7 @@ func _ready():
 		player.monsters[knife.get_instance_id()] = knife
 		add_child(knife)
 
-
+	$ShopButton.pressed.connect(handleShopButton)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

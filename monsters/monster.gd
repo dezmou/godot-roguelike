@@ -41,7 +41,7 @@ func _ready():
 func onHit(bully : RigidBody2D):
 	health += -bully.attack
 	$rectHealth.scale.x = health / start_health
-	apply_central_impulse(position.direction_to(bully.position) * BASE_IMPULSE_FORCE * -1)
+	apply_central_impulse(bully.position.direction_to(position) * BASE_IMPULSE_FORCE)
 	if health <= 0:
 		player.monsters.erase(get_instance_id())
 		queue_free()

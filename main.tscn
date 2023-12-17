@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b08fhvepmg6dp"]
+[gd_scene load_steps=8 format=3 uid="uid://b08fhvepmg6dp"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_rgajw"]
 [ext_resource type="Texture2D" uid="uid://dl4dao0ykuti8" path="res://art/stone.png" id="3_2g5ss"]
+[ext_resource type="Script" path="res://Shop.gd" id="3_jceb3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acrkr"]
 size = Vector2(129, 1000)
@@ -44,3 +45,24 @@ shape = SubResource("RectangleShape2D_7trey")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(296, 1056)
 shape = SubResource("RectangleShape2D_7gwnj")
+
+[node name="Shop" type="Control" parent="."]
+z_index = 2
+layout_mode = 3
+anchors_preset = 0
+offset_right = 600.0
+offset_bottom = 1000.0
+script = ExtResource("3_jceb3")
+
+[node name="ColorRect" type="ColorRect" parent="Shop"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 1000.0
+
+[node name="ShopButton" type="Button" parent="."]
+z_index = 1
+offset_left = 236.0
+offset_top = 904.0
+offset_right = 356.0
+offset_bottom = 960.0
+text = "Shop"
