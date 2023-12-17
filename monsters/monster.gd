@@ -1,16 +1,20 @@
 extends RigidBody2D
 
+const BASE_SPEED = 500
+const BASE_IMPULSE_FORCE = 300
+const TO_CENTER_FORCE = 200
+
 const Types = preload("res://Main.gd")
 @onready var Main = get_node("/root/Main")
 
 var health = 10
 var type = "base"
-var player : Types.Player = Types.Player.YOU
+var player = Types.YOU
 var currentTargetPosition = Vector2(500,1000)
 
-func init(newPlayer : Types.Player):
+func init(newPlayer):
 	player = newPlayer
-	if newPlayer == Types.Player.BOT:
+	if newPlayer == Types.BOT:
 		$Hitbox.set_collision_layer_value(1, true)
 		$Hitbox.set_collision_mask_value(2,true)
 	else:
@@ -32,7 +36,7 @@ func _ready():
 func _onMeet(body):
 	var target = body.get_parent()
 	Main.fight(self, target)
-	apply_central_impulse(position.direction_to(target.position) * 400 * -1)
+	apply_central_impulse(position.direction_to(target.position) * BASE_IMPULSE_FORCE * -1)
 
 func _process(delta):
 	pass
@@ -52,9 +56,9 @@ func findNearestEnnemy():
 
 
 func _physics_process(delta):
-	var force = position.direction_to(currentTargetPosition) * 600
-	if position.distance_to(currentTargetPosition) < 30:
-		force *= 4
+	var force = position.direction_to(currentTargetPosition) * BASE_SPEED
+	#if position.distance_to(currentTargetPosition) < 50:
+		#force *= 8
 	var center = Vector2(300,500)
-	force += position.direction_to(center) * 200;
+	force += position.direction_to(center) * TO_CENTER_FORCE;
 	apply_central_force(force)

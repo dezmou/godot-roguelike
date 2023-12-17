@@ -1,8 +1,8 @@
 extends "res://monsters/monster.gd"
 
 var sprites = {
-	Types.Player.BOT : preload("res://art/monster_red.png"),
-	Types.Player.YOU : preload("res://art/monster_blue.png"),
+	Types.BOT : preload("res://art/monster_red.png"),
+	Types.YOU : preload("res://art/monster_blue.png"),
 }
 
 # Called when the node enters the scene tree for the first time.
