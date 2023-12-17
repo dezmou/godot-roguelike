@@ -59,6 +59,14 @@ layout_mode = 0
 offset_right = 600.0
 offset_bottom = 1000.0
 
+[node name="GoButton" type="Button" parent="Shop"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 808.0
+offset_right = 560.0
+offset_bottom = 920.0
+text = "GO !"
+
 [node name="ShopButton" type="Button" parent="."]
 z_index = 1
 offset_left = 236.0

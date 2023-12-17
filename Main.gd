@@ -3,11 +3,13 @@ extends Node2D
 const NB_MONSTER = 40
 
 const Knife = preload("res://monsters/knife/knife.tscn")
+
 enum {YOU, BOT}
 
 class Player:
 	var monsters := {}
 	var belong := YOU
+	var spawnQueue : Array[RigidBody2D] = []
 		
 	func _init(_belong):
 		belong = _belong
@@ -44,6 +46,8 @@ func _ready():
 		add_child(knife)
 
 	$ShopButton.pressed.connect(handleShopButton)
+	$Shop.addMonsterCard(Knife)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
