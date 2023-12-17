@@ -1,6 +1,6 @@
 extends Node2D
 
-const NB_MONSTER = 40
+const NB_MONSTER = 5
 
 const Knife = preload("res://monsters/knife/knife.tscn")
 
@@ -9,7 +9,7 @@ enum {YOU, BOT}
 class Player:
 	var monsters := {}
 	var belong := YOU
-	var spawnQueue : Array[RigidBody2D] = []
+	var spawnQueue : Array[PackedScene] = []
 		
 	func _init(_belong):
 		belong = _belong
@@ -28,10 +28,13 @@ func getAllMonsters() -> Array[RigidBody2D]:
 	return res
 	
 
+func exitShop():
+	$BattleScene.get_tree().paused = false
+	$Shop.visible = false
+
 func handleShopButton():
 	$BattleScene.get_tree().paused = true
 	$Shop.visible = true
-	pass
 
 func spawnMonster(player : Player, Monster : PackedScene):
 	var knife = Monster.instantiate()
@@ -47,21 +50,18 @@ func _ready():
 	$Shop.visible = false
 	for i in range(NB_MONSTER):
 		spawnMonster(players[YOU if i % 2 == 0 else BOT], Knife)
-		#var knife = Knife.instantiate()
-		#var player = players[YOU if i % 2 == 0 else BOT]
-		#knife.init(player)
-		#knife.position.x = randi_range(50,450)
-		#knife.position.y = randi_range(50,950)
-		#player.monsters[knife.get_instance_id()] = knife
-		#$BattleScene.add_child(knife)
 
 	$ShopButton.pressed.connect(handleShopButton)
 	$Shop.addMonsterCard(Knife)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-
+	for player in [players[YOU], players[BOT]]:
+		for Monster in player.spawnQueue:
+			print(Monster)
+			spawnMonster(player, Monster)
+		player.spawnQueue.clear()
+		
 func onKilled(killer:RigidBody2D):
 	pass
 

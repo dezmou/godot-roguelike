@@ -1,6 +1,8 @@
 extends Control
 
 const Card = preload("res://card.tscn")
+
+const Types = preload("res://Main.gd")
 @onready var Main = get_node("/root/Main")
 
 func getMonsterInfos(Monster:PackedScene):
@@ -20,14 +22,13 @@ func addMonsterCard(Monster:PackedScene):
 	card.get_node("Title").text = "[center]" + infos["card"]["title"] + "[/center]"
 	card.get_node("Description").text = "[center]" + infos["card"]["text"] + "[/center]"
 	add_child(card)
-	#card.get_node("ClickArea").input_event.connect(func(): print("chien"))
 	card.get_node("ClickArea").pressed.connect(func(): 
-		print("chien")
+		Main.players[Types.YOU].spawnQueue.append(Monster)
 	)
 
 
 func go():
-	print("go go go")
+	Main.exitShop()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

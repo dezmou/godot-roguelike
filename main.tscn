@@ -50,6 +50,7 @@ position = Vector2(296, 1056)
 shape = SubResource("RectangleShape2D_7gwnj")
 
 [node name="Shop" type="Control" parent="."]
+process_mode = 3
 z_index = 2
 layout_mode = 3
 anchors_preset = 0
