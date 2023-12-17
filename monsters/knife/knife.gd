@@ -7,7 +7,7 @@ var sprites = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Sprite2D.texture = sprites[player]
+	$Sprite2D.texture = sprites[player.belong]
 	type = "knife"
 	super._ready()
 

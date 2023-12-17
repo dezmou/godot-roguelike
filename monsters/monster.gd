@@ -1,20 +1,23 @@
 extends RigidBody2D
 
 const BASE_SPEED = 500
-const BASE_IMPULSE_FORCE = 300
-const TO_CENTER_FORCE = 200
+const BASE_IMPULSE_FORCE = 400
+const TO_CENTER_FORCE = 50
 
 const Types = preload("res://Main.gd")
 @onready var Main = get_node("/root/Main")
 
-var health = 10
+var health = 100
+var attack = 10
+var precision = 10
+
 var type = "base"
-var player = Types.YOU
+var player : Types.Player
 var currentTargetPosition = Vector2(500,1000)
 
-func init(newPlayer):
-	player = newPlayer
-	if newPlayer == Types.BOT:
+func init(_player):
+	player = _player
+	if player.belong == Types.BOT:
 		$Hitbox.set_collision_layer_value(1, true)
 		$Hitbox.set_collision_mask_value(2,true)
 	else:
@@ -32,11 +35,13 @@ func _ready():
 	
 	($Hitbox as Area2D).area_entered.connect(_onMeet)
 
+func impulseFrom(target : RigidBody2D):
+	apply_central_impulse(position.direction_to(target.position) * BASE_IMPULSE_FORCE * -1)
 
 func _onMeet(body):
-	var target = body.get_parent()
-	Main.fight(self, target)
-	apply_central_impulse(position.direction_to(target.position) * BASE_IMPULSE_FORCE * -1)
+	if (player.belong == Types.YOU):
+		var target = body.get_parent()
+		Main.fight(self, target)
 
 func _process(delta):
 	pass
@@ -47,7 +52,8 @@ func _checkTarget():
 func findNearestEnnemy():
 	var min = 99999999
 	var minTarget = Vector2(300,500)
-	for ennemy in Main.allMonsters[Main.versus[player]].values() as Array[RigidBody2D]:
+	for ennemy in Main.versus(player).monsters.values() as Array[RigidBody2D]:
+	#for ennemy in Main.players[Main.versus[belong]].monsters.values() as Array[RigidBody2D]:
 		var distance = ennemy.position.distance_to(self.position)
 		if distance < min:
 			min = distance
