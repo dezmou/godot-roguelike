@@ -9,7 +9,7 @@ enum {YOU, BOT}
 class Player:
 	var monsters := {}
 	var belong := YOU
-	var spawnQueue : Array[PackedScene] = []
+	var spawnQueue : Array[PackedScene] = [Knife, Knife, Knife, Knife, Knife, Knife, Knife, Knife, Knife]
 		
 	func _init(_belong):
 		belong = _belong
@@ -18,6 +18,14 @@ var players := {
 	BOT : Player.new(BOT),
 	YOU : Player.new(YOU),
 }
+func setInterval(second: float, callBack : Callable):
+	var timer := Timer.new()
+	add_child(timer)
+	timer.wait_time = second
+	timer.one_shot = false
+	timer.timeout.connect(callBack)
+	timer.start()
+
 
 func versus(player : Player):
 	return players[{BOT : YOU, YOU : BOT}[player.belong]] 
@@ -48,17 +56,18 @@ func spawnMonster(player : Player, Monster : PackedScene):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Shop.visible = false
-	for i in range(NB_MONSTER):
-		spawnMonster(players[YOU if i % 2 == 0 else BOT], Knife)
-
 	$ShopButton.pressed.connect(handleShopButton)
 	$Shop.addMonsterCard(Knife)
+	setInterval(1, func(): 
+		if randi_range(0,10) == 8:
+			for i in randi_range(0,15):
+				players[BOT].spawnQueue.append(Knife)
+	)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	for player in [players[YOU], players[BOT]]:
 		for Monster in player.spawnQueue:
-			print(Monster)
 			spawnMonster(player, Monster)
 		player.spawnQueue.clear()
 		
