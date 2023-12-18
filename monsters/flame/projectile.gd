@@ -7,7 +7,7 @@ const Types = preload("res://Main.gd")
 #func hit(attack : float, fromPosition : Vector2, force : float):
 func _onMeet(body):
 	if ("isMonster" in body):
-		body.hit(5, position, 0.0)
+		body.hit(3, position, 0.0)
 		queue_free()
 
 

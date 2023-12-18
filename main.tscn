@@ -72,6 +72,15 @@ offset_right = 560.0
 offset_bottom = 920.0
 text = "GO !"
 
+[node name="RichTextLabel" type="RichTextLabel" parent="Shop"]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 328.0
+offset_right = 432.0
+offset_bottom = 532.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Each click add 3 item to the battlefield"
+
 [node name="ShopButton" type="Button" parent="."]
 z_index = 1
 offset_left = 236.0
@@ -79,3 +88,12 @@ offset_top = 904.0
 offset_right = 356.0
 offset_bottom = 960.0
 text = "Shop"
+
+[node name="WaveButton" type="Button" parent="."]
+z_index = 1
+offset_left = 40.0
+offset_top = 904.0
+offset_right = 208.0
+offset_bottom = 960.0
+text = "new ennemy wave
+"

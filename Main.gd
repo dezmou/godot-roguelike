@@ -11,8 +11,8 @@ class Player:
 	var monsters := {}
 	var belong := YOU
 	var starter = {
-		YOU : [Flame] as Array[PackedScene],
-		BOT : [Knife] as Array[PackedScene],
+		YOU : [] as Array[PackedScene],
+		BOT : [] as Array[PackedScene],
 	}
 	var spawnQueue : Array[PackedScene] = []
 		
@@ -59,18 +59,20 @@ func spawnMonster(player : Player, Monster : PackedScene):
 	$BattleScene.add_child(monster)
 
 
+func newWave():
+	for i in randi_range(0,15):
+		players[BOT].spawnQueue.append(Knife)
+	for i in randi_range(0,10):
+		players[BOT].spawnQueue.append(Flame)
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Shop.visible = false
 	$ShopButton.pressed.connect(handleShopButton)
+	$WaveButton.pressed.connect(newWave)
 	$Shop.addMonsterCard(Knife)
 	$Shop.addMonsterCard(Flame)
-	setInterval(0.3, func(): 
-		if randi_range(0,10) == 8:
-			for i in randi_range(0,15):
-				#players[BOT].spawnQueue.append(Knife)
-				pass
-	)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
