@@ -2,6 +2,8 @@ extends Node2D
 
 const NB_MONSTER = 5
 
+const waves = preload("res://waves.gd").new().waves
+
 const Knife = preload("res://monsters/knife/knife.tscn")
 const Flame = preload("res://monsters/flame/flame.tscn")
 
@@ -12,8 +14,8 @@ class Player:
 	var monsters := {}
 	var belong := YOU
 	var starter = {
-		YOU : [Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame] as Array[PackedScene],
-		BOT : [Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame] as Array[PackedScene],
+		YOU : [Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife] as Array[PackedScene],
+		BOT : [Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife] as Array[PackedScene],
 	}
 	var spawnQueue : Array[PackedScene] = []
 		
