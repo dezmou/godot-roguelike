@@ -3,13 +3,14 @@ extends Node2D
 const NB_MONSTER = 5
 
 const Knife = preload("res://monsters/knife/knife.tscn")
+const Flame = preload("res://monsters/flame/flame.tscn")
 
 enum {YOU, BOT}
 
 class Player:
 	var monsters := {}
 	var belong := YOU
-	var spawnQueue : Array[PackedScene] = [Knife, Knife, Knife, Knife, Knife, Knife, Knife, Knife, Knife]
+	var spawnQueue : Array[PackedScene] = [Knife, Knife, Knife, Knife, Knife, Flame,Flame,Flame,Flame]
 		
 	func _init(_belong):
 		belong = _belong
@@ -45,12 +46,12 @@ func handleShopButton():
 	$Shop.visible = true
 
 func spawnMonster(player : Player, Monster : PackedScene):
-	var knife = Monster.instantiate()
-	knife.init(player)
-	knife.position.x = randi_range(50,450)
-	knife.position.y = randi_range(50,950)
-	player.monsters[knife.get_instance_id()] = knife
-	$BattleScene.add_child(knife)
+	var monster = Monster.instantiate()
+	monster.init(player)
+	monster.position.x = randi_range(50,450)
+	monster.position.y = randi_range(50,950)
+	player.monsters[monster.get_instance_id()] = monster
+	$BattleScene.add_child(monster)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -58,7 +59,8 @@ func _ready():
 	$Shop.visible = false
 	$ShopButton.pressed.connect(handleShopButton)
 	$Shop.addMonsterCard(Knife)
-	setInterval(1, func(): 
+	$Shop.addMonsterCard(Flame)
+	setInterval(0.3, func(): 
 		if randi_range(0,10) == 8:
 			for i in randi_range(0,15):
 				players[BOT].spawnQueue.append(Knife)

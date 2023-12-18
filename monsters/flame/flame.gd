@@ -2,9 +2,9 @@ extends "res://monsters/monster.gd"
 
 const infos = {
 	"card" : {
-		"image" : preload("res://art/knife_card.png"),
-		"title" : "Glurmo",
-		"text" : "no special effect",
+		"image" : preload("res://art/flame_card.png"),
+		"title" : "Alphonse",
+		"text" : "Range attack",
 	},
 	"health" : 100,
 	"attack" : 10,
@@ -12,8 +12,8 @@ const infos = {
 }
 
 var sprites = {
-	Types.BOT : preload("res://art/monster_red.png"),
-	Types.YOU : preload("res://art/monster_blue.png"),
+	Types.BOT : preload("res://art/flame_red.png"),
+	Types.YOU : preload("res://art/flame_blue.png"),
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -22,7 +22,7 @@ func _ready():
 	attack = infos.attack
 	precision = infos.precision
 	$Sprite2D.texture = sprites[player.belong]
-	type = "knife"
+	type = "flame"
 	super._ready()
 
 

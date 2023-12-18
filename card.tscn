@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://budox0xno7ddb" path="res://art/knife_card.png" id="1_h1f7j"]
 
 [node name="Card" type="Node2D"]
+position = Vector2(112, 200)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -112.0
@@ -10,6 +11,7 @@ offset_top = -192.0
 offset_right = 112.0
 offset_bottom = 192.0
 color = Color(0.584314, 0.447059, 0.282353, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -88)
@@ -21,6 +23,7 @@ offset_left = -104.0
 offset_top = 56.0
 offset_right = 104.0
 offset_bottom = 184.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Description" type="RichTextLabel" parent="."]
 offset_left = -96.0
@@ -30,12 +33,14 @@ offset_bottom = 184.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "[center]it is the pince and the devils [/center]"
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 offset_left = -88.0
 offset_top = -200.0
 offset_right = 88.0
 offset_bottom = -176.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Title" type="RichTextLabel" parent="."]
 offset_left = -88.0
@@ -45,9 +50,11 @@ offset_bottom = -176.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "[center]Zouze[/center]"
+metadata/_edit_use_anchors_ = true
 
 [node name="ClickArea" type="TextureButton" parent="."]
 offset_left = -112.0
 offset_top = -200.0
 offset_right = 112.0
 offset_bottom = 192.0
+metadata/_edit_use_anchors_ = true
