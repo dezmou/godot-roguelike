@@ -143,6 +143,15 @@ layout_mode = 0
 offset_right = 600.0
 offset_bottom = 40.0
 
+[node name="GoldLabel" type="Label" parent="Shop"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 96.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(0.647059, 0.654902, 0, 1)
+text = "gold : 100"
+
 [node name="ShopButton" type="Button" parent="."]
 z_index = 1
 offset_left = 236.0
@@ -159,11 +168,3 @@ offset_right = 208.0
 offset_bottom = 960.0
 text = "new ennemy wave
 "
-
-[node name="GoldLabel" type="Label" parent="."]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 96.0
-offset_bottom = 31.0
-theme_override_colors/font_color = Color(0.647059, 0.654902, 0, 1)
-text = "gold : 100"

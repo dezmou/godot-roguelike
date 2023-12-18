@@ -8,11 +8,12 @@ const Flame = preload("res://monsters/flame/flame.tscn")
 enum {YOU, BOT}
 
 class Player:
+	var gold := 100.0
 	var monsters := {}
 	var belong := YOU
 	var starter = {
-		YOU : [] as Array[PackedScene],
-		BOT : [] as Array[PackedScene],
+		YOU : [Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame] as Array[PackedScene],
+		BOT : [Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame,Flame] as Array[PackedScene],
 	}
 	var spawnQueue : Array[PackedScene] = []
 		
@@ -58,6 +59,16 @@ func spawnMonster(player : Player, Monster : PackedScene):
 	player.monsters[monster.get_instance_id()] = monster
 	$BattleScene.add_child(monster)
 
+func updateGold(player, amount:float):
+	player.gold = amount
+	$GoldLabel.text = "gold :" + str(int(player.gold))
+
+func calculateGold():
+	var goldAdd := 0.0
+	for monster in players[YOU].monsters.values() as Array[RigidBody2D]:
+		goldAdd += 0.5
+	print("\n")
+	updateGold(players[YOU], players[YOU].gold + goldAdd)
 
 func newWave():
 	for i in randi_range(0,15):
@@ -73,6 +84,7 @@ func _ready():
 	$WaveButton.pressed.connect(newWave)
 	$Shop.addMonsterCard(Knife)
 	$Shop.addMonsterCard(Flame)
+	setInterval(1.0, calculateGold)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

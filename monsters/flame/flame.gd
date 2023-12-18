@@ -44,6 +44,7 @@ func _ready():
 	$Sprite2D.texture = sprites[player.belong]
 	type = "flame"
 	super._ready()
+	await get_tree().create_timer(randf_range(0,0.4)).timeout
 	setInterval(0.2,shotFlame)
 
 func getGoForce():
