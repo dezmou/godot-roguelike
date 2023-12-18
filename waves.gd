@@ -15,8 +15,6 @@ const waves := [
 	{"wait" : 10.0, "monsters" : [{"type" : Knife, "nbr" : 50}, {"type" : Flame,"nbr" : 20}]},
 	{"wait" : 10.0, "monsters" : [{"type" : Knife, "nbr" : 50}, {"type" : Flame,"nbr" : 20}]},
 	{"wait" : 10.0, "monsters" : [{"type" : Knife, "nbr" : 50}, {"type" : Flame,"nbr" : 20}]},
-	{"wait" : 10.0, "monsters" : [{"type" : Knife, "nbr" : 50}, {"type" : Flame,"nbr" : 20}]},
-	{"wait" : 10.0, "monsters" : [{"type" : Knife, "nbr" : 50}, {"type" : Flame,"nbr" : 20}]},
-	{"wait" : 10.0, "monsters" : [{"type" : Knife, "nbr" : 50}, {"type" : Flame,"nbr" : 20}]},
-	{"wait" : 10.0, "monsters" : [{"type" : Knife, "nbr" : 50}, {"type" : Flame,"nbr" : 20}]},
+	{"wait" : 10.0, "monsters" : [{"type" : Knife, "nbr" : 150}, {"type" : Flame,"nbr" : 150}]},
+	{"wait" : 10.0, "monsters" : [{"type" : Knife, "nbr" : 1000}, {"type" : Flame,"nbr" : 0}]},
 ]

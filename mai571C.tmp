@@ -137,7 +137,7 @@ offset_top = 328.0
 offset_right = 432.0
 offset_bottom = 532.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Each click add 5 item to the battlefield"
+text = "Each click add 3 item to the battlefield"
 
 [node name="ShopButton" type="Button" parent="."]
 z_index = 1
@@ -155,11 +155,3 @@ offset_right = 96.0
 offset_bottom = 31.0
 theme_override_colors/font_color = Color(0.647059, 0.654902, 0, 1)
 text = "gold : 100"
-
-[node name="NbrMonsterLabel" type="Label" parent="."]
-offset_left = 488.0
-offset_top = 8.0
-offset_right = 592.0
-offset_bottom = 31.0
-text = "0/100"
-horizontal_alignment = 2

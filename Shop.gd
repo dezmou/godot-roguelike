@@ -33,6 +33,7 @@ func addMonsterCard(Monster:PackedScene):
 				Main.players[Types.YOU].spawnQueue.append(Monster)
 		
 		Main.updateGold(Main.players[Types.YOU])
+		Main.updateHudNumber()
 	)
 	cardNumber += 1
 

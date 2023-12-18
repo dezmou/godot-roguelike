@@ -84,18 +84,12 @@ func handleWaves():
 			for i in monsterBloc["nbr"]:
 				players[BOT].spawnQueue.append(monsterBloc["type"])
 		
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	$Shop.visible = false
-	$ShopButton.pressed.connect(handleShopButton)
-	$Shop.addMonsterCard(Knife)
-	$Shop.addMonsterCard(Flame)
-	setInterval(0.5, calculateGold)
-	handleWaves()
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+
+func updateHudNumber():
+	$NbrMonsterLabel.text = str(players[YOU].monsters.keys().size() + players[YOU].spawnQueue.size()) + " / 100"
+
+func processQueue():
+	updateHudNumber()
 	for player in [players[YOU], players[BOT]]:
 		var space = true
 		var overflow : Array[PackedScene] = []
@@ -107,6 +101,20 @@ func _process(delta):
 			else:
 				spawnMonster(player, Monster)
 		player.spawnQueue = overflow
+
+func _ready():
+	$Shop.visible = false
+	$ShopButton.pressed.connect(handleShopButton)
+	$Shop.addMonsterCard(Knife)
+	$Shop.addMonsterCard(Flame)
+	setInterval(0.5, calculateGold)
+	setInterval(0.1, processQueue)
+	handleWaves()
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
 		
 func onKilled(killer:RigidBody2D):
 	pass
