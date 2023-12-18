@@ -10,10 +10,15 @@ enum {YOU, BOT}
 class Player:
 	var monsters := {}
 	var belong := YOU
-	var spawnQueue : Array[PackedScene] = [Flame]
+	var starter = {
+		YOU : [Flame] as Array[PackedScene],
+		BOT : [Knife] as Array[PackedScene],
+	}
+	var spawnQueue : Array[PackedScene] = []
 		
 	func _init(_belong):
 		belong = _belong
+		spawnQueue = starter[_belong]
 
 var players := {
 	BOT : Player.new(BOT),

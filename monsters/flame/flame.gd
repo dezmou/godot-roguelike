@@ -11,6 +11,7 @@ const infos = {
 	"health" : 30,
 	"attack" : 0,
 	"precision" : 0,
+	"speed" : 0.8,
 }
 
 var sprites = {
@@ -39,6 +40,7 @@ func _ready():
 	health = infos.health
 	attack = infos.attack
 	precision = infos.precision
+	speed = infos.speed
 	$Sprite2D.texture = sprites[player.belong]
 	type = "flame"
 	super._ready()
@@ -51,7 +53,7 @@ func getGoForce():
 			force *= -1
 		var center = Vector2(300,500)
 		force += position.direction_to(center) * TO_CENTER_FORCE;
-		return force
+		return force * speed
 	return null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -7,10 +7,11 @@ const TO_CENTER_FORCE = 50
 const Types = preload("res://Main.gd")
 @onready var Main = get_node("/root/Main")
 
-var start_health = 100.0
-var health = start_health
-var attack = 10.0
-var precision = 10.0
+var start_health := 100.0
+var health := start_health
+var attack := 10.0
+var precision := 10.0
+var speed := 1.0
 
 var type = "base"
 var player : Types.Player
@@ -81,7 +82,7 @@ func getGoForce():
 			force *= 2
 		var center = Vector2(300,500)
 		force += position.direction_to(center) * TO_CENTER_FORCE;
-		return force
+		return force * speed
 	return null
 
 func _physics_process(delta):

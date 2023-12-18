@@ -27,7 +27,7 @@ func addMonsterCard(Monster:PackedScene):
 	card.get_node("Sprite2D").texture = infos["card"]["image"]
 	add_child(card)
 	card.get_node("ClickArea").pressed.connect(func(): 
-		for i in range(15):
+		for i in range(1):
 			Main.players[Types.YOU].spawnQueue.append(Monster)
 	)
 	cardNumber += 1

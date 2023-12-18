@@ -9,6 +9,7 @@ const infos = {
 	"health" : 100,
 	"attack" : 10,
 	"precision" : 10,
+	"speed" : 1,
 }
 
 var sprites = {
@@ -19,6 +20,7 @@ var sprites = {
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	health = infos.health
+	speed = infos.speed
 	attack = infos.attack
 	precision = infos.precision
 	$Sprite2D.texture = sprites[player.belong]
