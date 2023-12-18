@@ -16,6 +16,8 @@ var type = "base"
 var player : Types.Player
 var currentTargetPosition = null
 
+const isMonster = true
+
 func init(_player):
 	player = _player
 	if player.belong == Types.BOT:
@@ -38,17 +40,21 @@ func _ready():
 	max_contacts_reported = 1
 	body_entered.connect(_onMeet)
 
-func onHit(bully : RigidBody2D):
-	health += -bully.attack
+func hit(attack : float, fromPosition : Vector2, force : float):
+	health += -attack
 	$rectHealth.scale.x = health / start_health
-	apply_central_impulse(bully.position.direction_to(position) * BASE_IMPULSE_FORCE)
+	apply_central_impulse(fromPosition.direction_to(position) * BASE_IMPULSE_FORCE * force)
 	if health <= 0:
 		player.monsters.erase(get_instance_id())
 		queue_free()
+
+
+func onHit(bully : RigidBody2D, force : float):
+	hit(bully.attack, bully.position, force)
 	
 
 func _onMeet(body):
-	if (body is RigidBody2D and player.belong == Types.YOU):
+	if ("isMonster" in body and player.belong == Types.YOU):
 		Main.fight(self, body)
 
 func _process(delta):
@@ -68,12 +74,18 @@ func findNearestEnnemy():
 			minTarget = ennemy.position
 	return minTarget
 
-
-func _physics_process(delta):
+func getGoForce():
 	if (currentTargetPosition):
 		var force = position.direction_to(currentTargetPosition) * BASE_SPEED
 		if position.distance_to(currentTargetPosition) < 50:
 			force *= 2
 		var center = Vector2(300,500)
 		force += position.direction_to(center) * TO_CENTER_FORCE;
+		return force
+	return null
+
+func _physics_process(delta):
+	var force = getGoForce()
+	if force:
 		apply_central_force(force)
+		

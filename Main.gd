@@ -10,7 +10,7 @@ enum {YOU, BOT}
 class Player:
 	var monsters := {}
 	var belong := YOU
-	var spawnQueue : Array[PackedScene] = [Knife, Knife, Knife, Knife, Knife, Flame,Flame,Flame,Flame]
+	var spawnQueue : Array[PackedScene] = [Flame]
 		
 	func _init(_belong):
 		belong = _belong
@@ -63,7 +63,8 @@ func _ready():
 	setInterval(0.3, func(): 
 		if randi_range(0,10) == 8:
 			for i in randi_range(0,15):
-				players[BOT].spawnQueue.append(Knife)
+				#players[BOT].spawnQueue.append(Knife)
+				pass
 	)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -85,5 +86,5 @@ func fight(a:RigidBody2D, b:RigidBody2D):
 	if randi_range(0,a.precision + b.precision) > a.precision:
 		winner = b
 		loser = a
-	loser.onHit(winner)
+	loser.onHit(winner, 1.0)
 		
