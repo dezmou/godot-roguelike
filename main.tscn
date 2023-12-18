@@ -147,15 +147,6 @@ offset_right = 356.0
 offset_bottom = 960.0
 text = "Shop"
 
-[node name="WaveButton" type="Button" parent="."]
-z_index = 1
-offset_left = 40.0
-offset_top = 904.0
-offset_right = 208.0
-offset_bottom = 960.0
-text = "new ennemy wave
-"
-
 [node name="GoldLabel" type="Label" parent="."]
 z_index = 10
 offset_left = 8.0

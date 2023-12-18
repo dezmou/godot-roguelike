@@ -77,22 +77,36 @@ func newWave():
 	for i in randi_range(0,10):
 		players[BOT].spawnQueue.append(Flame)
 
-
+func handleWaves():
+	for wave in waves:
+		await get_tree().create_timer(wave["wait"]).timeout
+		for monsterBloc in wave["monsters"]:
+			for i in monsterBloc["nbr"]:
+				players[BOT].spawnQueue.append(monsterBloc["type"])
+		
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Shop.visible = false
 	$ShopButton.pressed.connect(handleShopButton)
-	$WaveButton.pressed.connect(newWave)
 	$Shop.addMonsterCard(Knife)
 	$Shop.addMonsterCard(Flame)
 	setInterval(0.5, calculateGold)
+	handleWaves()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	pass
 	for player in [players[YOU], players[BOT]]:
+		var space = true
+		var overflow : Array[PackedScene] = []
 		for Monster in player.spawnQueue:
-			spawnMonster(player, Monster)
-		player.spawnQueue.clear()
+			if player.monsters.keys().size() >= 100:
+				space = false
+			if space == false:
+				overflow.append(Monster)
+			else:
+				spawnMonster(player, Monster)
+		player.spawnQueue = overflow
 		
 func onKilled(killer:RigidBody2D):
 	pass
