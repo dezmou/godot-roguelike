@@ -7,6 +7,7 @@ const TO_CENTER_FORCE = 50
 const Types = preload("res://Main.gd")
 @onready var Main = get_node("/root/Main")
 
+var gold := 5
 var start_health := 100.0
 var health := start_health
 var attack := 10.0

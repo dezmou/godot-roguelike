@@ -117,6 +117,7 @@ script = ExtResource("3_jceb3")
 
 [node name="ColorRect" type="ColorRect" parent="Shop"]
 layout_mode = 0
+offset_top = 40.0
 offset_right = 600.0
 offset_bottom = 1000.0
 color = Color(1, 1, 1, 0.639216)
@@ -138,11 +139,6 @@ offset_bottom = 532.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Each click add 3 item to the battlefield"
 
-[node name="ColorRect2" type="ColorRect" parent="Shop"]
-layout_mode = 0
-offset_right = 600.0
-offset_bottom = 40.0
-
 [node name="ShopButton" type="Button" parent="."]
 z_index = 1
 offset_left = 236.0
@@ -161,6 +157,7 @@ text = "new ennemy wave
 "
 
 [node name="GoldLabel" type="Label" parent="."]
+z_index = 10
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 96.0

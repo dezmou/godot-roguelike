@@ -59,16 +59,15 @@ func spawnMonster(player : Player, Monster : PackedScene):
 	player.monsters[monster.get_instance_id()] = monster
 	$BattleScene.add_child(monster)
 
-func updateGold(player, amount:float):
-	player.gold = amount
+func updateGold(player):
 	$GoldLabel.text = "gold :" + str(int(player.gold))
 
 func calculateGold():
 	var goldAdd := 0.0
 	for monster in players[YOU].monsters.values() as Array[RigidBody2D]:
-		goldAdd += 0.5
-	print("\n")
-	updateGold(players[YOU], players[YOU].gold + goldAdd)
+		goldAdd += monster.gold * 0.05
+	players[YOU].gold = players[YOU].gold + goldAdd
+	updateGold(players[YOU])
 
 func newWave():
 	for i in randi_range(0,15):
@@ -84,7 +83,7 @@ func _ready():
 	$WaveButton.pressed.connect(newWave)
 	$Shop.addMonsterCard(Knife)
 	$Shop.addMonsterCard(Flame)
-	setInterval(1.0, calculateGold)
+	setInterval(0.5, calculateGold)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -21,14 +21,18 @@ func addMonsterCard(Monster:PackedScene):
 	card.scale.y = 0.7
 	var cardSize = Vector2(card.get_node("ClickArea").get_rect().size.x, card.get_node("ClickArea").get_rect().size.y)
 	card.position.x = ((cardSize.x * card.scale.x) / 2.0 + 10) + (cardSize.x * cardNumber)
-	card.position.y = (cardSize.y * card.scale.y) / 2.0 + 10
+	card.position.y = (cardSize.y * card.scale.y) / 2.0 + 500
 	card.get_node("Title").text = "[center]" + infos["card"]["title"] + "[/center]"
 	card.get_node("Description").text = "[center]" + infos["card"]["text"] + "[/center]"
 	card.get_node("Sprite2D").texture = infos["card"]["image"]
 	add_child(card)
 	card.get_node("ClickArea").pressed.connect(func(): 
-		for i in range(3):
-			Main.players[Types.YOU].spawnQueue.append(Monster)
+		for i in range(5):
+			if (Main.players[Types.YOU].gold >= infos.gold):
+				Main.players[Types.YOU].gold += -infos.gold
+				Main.players[Types.YOU].spawnQueue.append(Monster)
+		
+		Main.updateGold(Main.players[Types.YOU])
 	)
 	cardNumber += 1
 
