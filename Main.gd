@@ -73,7 +73,7 @@ func updateGold(player):
 func calculateGold():
 	var goldAdd := 0.0
 	for monster in players[YOU].monsters.values() as Array[RigidBody2D]:
-		goldAdd += monster.gold * 0.05 * 0.2
+		goldAdd += monster.infos.gain * 0.2
 	players[YOU].gold = players[YOU].gold + goldAdd
 	updateGold(players[YOU])
 

@@ -53,3 +53,12 @@ offset_bottom = 536.0
 theme_override_font_sizes/font_size = 25
 text = "Add 10
 $35"
+
+[node name="Infos" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 128.0
+offset_right = 118.0
+offset_bottom = 264.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true

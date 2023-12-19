@@ -10,11 +10,11 @@ const infos = {
 	},
 	"name" : "flame",
 	"health" : 30,	
-	"attack" : 0,
-	"precision" : 0,
+	"attack" : 3,
+	"precision" : ".",
 	"speed" : 0.9,
-	"gold" : 5.0,
-	"gain" : 1,
+	"gold" : 6.0,
+	"gain" : 0.5,
 }
 
 var sprites = {
@@ -41,8 +41,8 @@ func shotFlame():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	health = infos.health
-	attack = infos.attack
-	precision = infos.precision
+	attack = 0
+	precision = 0
 	speed = infos.speed
 	gold = infos.gold
 	$Sprite2D.texture = sprites[player.belong]
