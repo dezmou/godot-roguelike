@@ -21,8 +21,8 @@ class Player:
 	var belong := YOU
 
 	var spawnQueue := {
-		"knife" : 0,
-		"flame" : 500000,
+		"knife" : 100000,
+		"flame" : 100000,
 	}
 		
 	func _init(_belong):
@@ -71,7 +71,6 @@ func updateGold(player):
 	$GoldLabel.text = "gold :" + str(int(player.gold))
 
 func calculateGold():
-	print(players[YOU].nbrMonster, players[BOT].nbrMonster)
 	var goldAdd := 0.0
 	for monster in players[YOU].monsters.values() as Array[RigidBody2D]:
 		goldAdd += monster.gold * 0.05
@@ -96,10 +95,10 @@ func processQueue(player):
 	while true:
 		while true:
 			var found = false
-			if player.nbrMonster < 5:
+			if player.nbrMonster < 80:
 				keys.shuffle()
 				for key in keys:
-					if player.nbrMonster >= 5:
+					if player.nbrMonster >= 80:
 						break
 					if player.spawnQueue[key] > 0:
 						spawnMonster(player, monsters[key])
