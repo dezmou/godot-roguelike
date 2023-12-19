@@ -41,10 +41,12 @@ func shotFlame():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	health = infos.health
+	start_health = health
 	attack = 0
 	precision = 0
 	speed = infos.speed
 	gold = infos.gold
+	gain = infos.gain
 	$Sprite2D.texture = sprites[player.belong]
 	type = "flame"
 	super._ready()

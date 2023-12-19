@@ -13,6 +13,7 @@ var health := start_health
 var attack := 10.0
 var precision := 10.0
 var speed := 1.0
+var gain = 0.0
 
 var active = true
 var type = "base"

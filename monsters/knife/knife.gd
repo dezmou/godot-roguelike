@@ -23,10 +23,12 @@ var sprites = {
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	health = infos.health
+	start_health = infos.health
 	speed = infos.speed
 	attack = infos.attack
 	precision = infos.precision
 	gold = infos.gold
+	gain = infos.gain
 	$Sprite2D.texture = sprites[player.belong]
 	type = "knife"
 	super._ready()
