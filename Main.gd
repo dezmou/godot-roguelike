@@ -8,6 +8,8 @@ const waves = preload("res://waves.gd").new().waves
 const Knife = preload("res://monsters/knife/knife.tscn")
 const Flame = preload("res://monsters/flame/flame.tscn")
 
+const Column = preload("res://column.tscn")
+
 const monsters := {
 	"knife" : Knife,
 	"flame" : Flame,
@@ -110,6 +112,11 @@ func processQueue(player):
 		updateHudNumber()
 		await get_tree().create_timer(0.1).timeout
 
+func createShop():
+	var column = Column.instantiate()
+	column.init(Knife)
+	$Control.add_child(column)
+	pass
 
 func _ready():
 	$ShopButton.pressed.connect(handleShopButton)
@@ -117,6 +124,7 @@ func _ready():
 	for player in [players[YOU], players[BOT]]:
 		processQueue(player)
 	handleWaves()
+	createShop()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

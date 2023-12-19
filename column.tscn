@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2i22smt2oqcl"]
+
+[ext_resource type="Script" path="res://column.gd" id="1_54obg"]
+[ext_resource type="Texture2D" uid="uid://budox0xno7ddb" path="res://art/knife_card.png" id="1_ytbsn"]
+
+[node name="Column" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 104.0
+offset_bottom = 544.0
+script = ExtResource("1_54obg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 104.0
+offset_bottom = 544.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 96.0
+offset_bottom = 96.0
+texture = ExtResource("1_ytbsn")
+expand_mode = 1
+
+[node name="Add1" type="Button" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 328.0
+offset_right = 96.0
+offset_bottom = 392.0
+text = "Add 1
+$5"
+
+[node name="Add5" type="Button" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 400.0
+offset_right = 96.0
+offset_bottom = 464.0
+text = "Add 5
+$20"
+
+[node name="Add10" type="Button" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 472.0
+offset_right = 96.0
+offset_bottom = 536.0
+text = "Add 10
+$35"

@@ -30,8 +30,6 @@ func init(_player):
 		set_collision_layer_value(2, true)
 		set_collision_mask_value(1,true)
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var timer := Timer.new()

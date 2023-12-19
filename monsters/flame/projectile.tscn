@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ei5w478slphd" path="res://art/fla.png" id="1_luqr4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tceeq"]
-radius = 14.0357
+radius = 9.0
 
 [node name="Projectile" type="RigidBody2D"]
 collision_layer = 0
@@ -15,5 +15,5 @@ script = ExtResource("1_cyd4a")
 shape = SubResource("CircleShape2D_tceeq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.4375, 0.4375)
+scale = Vector2(0.28125, 0.28125)
 texture = ExtResource("1_luqr4")
