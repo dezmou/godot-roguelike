@@ -6,6 +6,7 @@ const infos = {
 		"title" : "Glurmo",
 		"text" : "no special effect",
 	},
+	"name" : "knife",
 	"health" : 100,
 	"attack" : 10,
 	"precision" : 10,

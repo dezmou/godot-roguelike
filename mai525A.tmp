@@ -89,6 +89,15 @@ offset_bottom = 552.0
 texture = ExtResource("2_wgugi")
 expand_mode = 1
 
+[node name="ShopButton" type="Button" parent="."]
+visible = false
+z_index = 1
+offset_left = 236.0
+offset_top = 904.0
+offset_right = 356.0
+offset_bottom = 960.0
+text = "Shop"
+
 [node name="GoldLabel" type="Label" parent="."]
 z_index = 10
 offset_left = 8.0

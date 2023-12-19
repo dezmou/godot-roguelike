@@ -10,6 +10,8 @@ const Flame = preload("res://monsters/flame/flame.tscn")
 
 const Column = preload("res://column.tscn")
 
+var columns : Array[Control] = [];
+
 const monsters := {
 	"knife" : Knife,
 	"flame" : Flame,
@@ -19,7 +21,7 @@ enum {YOU, BOT}
 
 class Player:
 	var maxMonster = 40
-	var gold := 100000.0
+	var gold := 100.0
 	var nbrMonster = 0
 	var monsters := {}
 	var belong := YOU
@@ -54,14 +56,6 @@ func getAllMonsters() -> Array[RigidBody2D]:
 	return res
 	
 
-func exitShop():
-	$BattleScene.get_tree().paused = false
-	$Shop.visible = false
-
-func handleShopButton():
-	$BattleScene.get_tree().paused = true
-	$Shop.visible = true
-
 func spawnMonster(_player : Player, Monster : PackedScene):
 	_player.nbrMonster += 1
 	var monster = Monster.instantiate()
@@ -72,7 +66,9 @@ func spawnMonster(_player : Player, Monster : PackedScene):
 	$BattleScene.add_child(monster)
 
 func updateGold(player):
-	$GoldLabel.text = "gold :" + str(int(player.gold))
+	$GoldLabel.text = "$" + str(int(player.gold))
+	for column in columns:
+		column.checkGold()
 
 func calculateGold():
 	var goldAdd := 0.0
@@ -90,7 +86,10 @@ func handleWaves():
 		
 
 func updateHudNumber():
-	$NbrMonsterLabel.text = str(players[YOU].nbrMonster) + " / " + str(players[YOU].maxMonster)
+	var nbr = players[YOU].nbrMonster
+	for q in players[YOU].spawnQueue.values():
+		nbr += q
+	$NbrMonsterLabel.text = str(nbr) + " / " + str(players[YOU].maxMonster)
 
 func processQueue(player):
 	var keys = player.spawnQueue.keys()
@@ -113,14 +112,16 @@ func processQueue(player):
 		await get_tree().create_timer(0.1).timeout
 
 func createShop():
-	var column = Column.instantiate()
-	column.init(Knife)
-	$Control.add_child(column)
-	pass
+	var index = -1
+	for monster in [Knife, Flame]:
+		index += 1
+		var column = Column.instantiate()
+		$Control.add_child(column)
+		column.init(monster, index)
+		columns.append(column)
 
 func _ready():
-	$ShopButton.pressed.connect(handleShopButton)
-	setInterval(0.5, calculateGold)
+	setInterval(1.0, calculateGold)
 	for player in [players[YOU], players[BOT]]:
 		processQueue(player)
 	handleWaves()

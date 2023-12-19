@@ -12,41 +12,44 @@ script = ExtResource("1_54obg")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 104.0
+offset_right = 128.0
 offset_bottom = 544.0
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Image" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 96.0
-offset_bottom = 96.0
+offset_right = 120.0
+offset_bottom = 120.0
 texture = ExtResource("1_ytbsn")
 expand_mode = 1
 
 [node name="Add1" type="Button" parent="."]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 328.0
-offset_right = 96.0
-offset_bottom = 392.0
+offset_top = 272.0
+offset_right = 118.0
+offset_bottom = 360.0
+theme_override_font_sizes/font_size = 28
 text = "Add 1
 $5"
 
 [node name="Add5" type="Button" parent="."]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 400.0
-offset_right = 96.0
-offset_bottom = 464.0
+offset_top = 368.0
+offset_right = 118.0
+offset_bottom = 448.0
+theme_override_font_sizes/font_size = 25
 text = "Add 5
 $20"
 
 [node name="Add10" type="Button" parent="."]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 472.0
-offset_right = 96.0
+offset_top = 456.0
+offset_right = 118.0
 offset_bottom = 536.0
+theme_override_font_sizes/font_size = 25
 text = "Add 10
 $35"
