@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://baicnq060dt0l"]
+
+[ext_resource type="PackedScene" uid="uid://bqaxu668bw6mt" path="res://monsters/monster.tscn" id="1_s7jsw"]
+[ext_resource type="Script" path="res://monsters/bomb/bomb.gd" id="2_6opuj"]
+[ext_resource type="Texture2D" uid="uid://k4837kd2cl0f" path="res://art/bomb_red.png" id="3_tjkou"]
+[ext_resource type="Texture2D" uid="uid://copwto6lqmt6y" path="res://art/explode.png" id="4_pjqny"]
+
+[node name="Bomb" instance=ExtResource("1_s7jsw")]
+mass = 5.0
+script = ExtResource("2_6opuj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+scale = Vector2(0.65625, 0.65625)
+texture = ExtResource("3_tjkou")
+
+[node name="Explode" type="Sprite2D" parent="." index="4"]
+visible = false
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("4_pjqny")

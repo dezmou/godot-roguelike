@@ -7,6 +7,7 @@ const waves = preload("res://waves.gd").new().waves
 
 const Knife = preload("res://monsters/knife/knife.tscn")
 const Flame = preload("res://monsters/flame/flame.tscn")
+const Bomb = preload("res://monsters/bomb/bomb.tscn")
 
 const Column = preload("res://column.tscn")
 
@@ -15,13 +16,14 @@ var columns : Array[Control] = [];
 const monsters := {
 	"knife" : Knife,
 	"flame" : Flame,
+	"bomb" : Bomb,
 }
 
 enum {YOU, BOT}
 
 class Player:
 	var maxMonster = 40
-	var gold := 10.0
+	var gold := 1000.0
 	var nbrMonster = 0
 	var monsters := {}
 	var belong := YOU
@@ -29,6 +31,7 @@ class Player:
 	var spawnQueue := {
 		"knife" : 0,
 		"flame" : 0,
+		"bomb" : 0,
 	}
 		
 	func _init(_belong):
@@ -104,6 +107,7 @@ func processQueue(player):
 						break
 					if player.spawnQueue[key] > 0:
 						spawnMonster(player, monsters[key])
+						await get_tree().create_timer(0.02).timeout
 						found = true
 						player.spawnQueue[key] += -1
 			if not found:
@@ -113,7 +117,7 @@ func processQueue(player):
 
 func createShop():
 	var index = -1
-	for monster in [Knife, Flame]:
+	for monster in [Knife, Flame, Bomb]:
 		index += 1
 		var column = Column.instantiate()
 		$Control.add_child(column)
