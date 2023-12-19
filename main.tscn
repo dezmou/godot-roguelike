@@ -1,11 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b08fhvepmg6dp"]
+[gd_scene load_steps=6 format=3 uid="uid://b08fhvepmg6dp"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_rgajw"]
-[ext_resource type="Texture2D" uid="uid://dl4dao0ykuti8" path="res://art/stone.png" id="3_2g5ss"]
-[ext_resource type="Script" path="res://Shop.gd" id="3_jceb3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yrwfl"]
-size = Vector2(1688, 584)
+size = Vector2(1688, 1012)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yblc5"]
 size = Vector2(656, 2112)
@@ -19,104 +17,69 @@ size = Vector2(1696, 632)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_rgajw")
 
+[node name="Control" type="Control" parent="."]
+z_index = 4096
+layout_mode = 3
+anchors_preset = 0
+offset_top = 552.0
+offset_right = 600.0
+offset_bottom = 1000.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 448.0
+color = Color(0.756863, 0.596078, 0.396078, 1)
+
 [node name="BattleScene" type="Node2D" parent="."]
 z_index = 1
 
-[node name="TextureRect" type="TextureRect" parent="BattleScene"]
-offset_left = -112.0
-offset_top = -24.0
-offset_right = 712.0
-offset_bottom = 1016.0
-texture = ExtResource("3_2g5ss")
-metadata/_edit_lock_ = true
-
 [node name="Area2D" type="Area2D" parent="BattleScene"]
+visible = false
 collision_layer = 0
 collision_mask = 271
 gravity_space_override = 1
 gravity_point_center = Vector2(0, -5)
 gravity_direction = Vector2(0, -5)
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleScene/Area2D"]
-position = Vector2(364, 1252)
+position = Vector2(356, 1022)
 shape = SubResource("RectangleShape2D_yrwfl")
-metadata/_edit_lock_ = true
 
 [node name="Area2DRight" type="Area2D" parent="BattleScene"]
+visible = false
 collision_layer = 0
 collision_mask = 271
 gravity_space_override = 1
 gravity_point_center = Vector2(-5, 1)
 gravity_direction = Vector2(-5, 1)
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleScene/Area2DRight"]
 position = Vector2(888, 472)
 shape = SubResource("RectangleShape2D_yblc5")
-metadata/_edit_lock_ = true
 
 [node name="Left" type="Area2D" parent="BattleScene"]
+visible = false
 collision_layer = 0
 collision_mask = 271
 gravity_space_override = 1
 gravity_point_center = Vector2(5, 0)
 gravity_direction = Vector2(5, 0)
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleScene/Left"]
 position = Vector2(-212, 476)
 shape = SubResource("RectangleShape2D_axdr3")
-metadata/_edit_lock_ = true
 
 [node name="Top" type="Area2D" parent="BattleScene"]
+visible = false
 collision_layer = 0
 collision_mask = 271
 gravity_space_override = 1
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleScene/Top"]
 position = Vector2(368, -276)
 shape = SubResource("RectangleShape2D_4bw04")
 one_way_collision_margin = 5.0
-metadata/_edit_lock_ = true
-
-[node name="Shop" type="Control" parent="."]
-process_mode = 3
-z_index = 2
-layout_mode = 3
-anchors_preset = 0
-offset_right = 600.0
-offset_bottom = 1000.0
-script = ExtResource("3_jceb3")
-metadata/_edit_lock_ = true
-
-[node name="ColorRect" type="ColorRect" parent="Shop"]
-layout_mode = 0
-offset_top = 40.0
-offset_right = 600.0
-offset_bottom = 1000.0
-color = Color(1, 1, 1, 0.639216)
-metadata/_edit_lock_ = true
-
-[node name="GoButton" type="Button" parent="Shop"]
-layout_mode = 0
-offset_left = 440.0
-offset_top = 808.0
-offset_right = 560.0
-offset_bottom = 920.0
-text = "GO !"
-metadata/_edit_lock_ = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Shop"]
-layout_mode = 0
-offset_left = 120.0
-offset_top = 328.0
-offset_right = 432.0
-offset_bottom = 532.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Each click add 5 item to the battlefield"
-metadata/_edit_lock_ = true
 
 [node name="ShopButton" type="Button" parent="."]
 visible = false
@@ -126,7 +89,6 @@ offset_top = 904.0
 offset_right = 356.0
 offset_bottom = 960.0
 text = "Shop"
-metadata/_edit_lock_ = true
 
 [node name="GoldLabel" type="Label" parent="."]
 z_index = 10
@@ -136,7 +98,6 @@ offset_right = 96.0
 offset_bottom = 31.0
 theme_override_colors/font_color = Color(0.647059, 0.654902, 0, 1)
 text = "gold : 100"
-metadata/_edit_lock_ = true
 
 [node name="NbrMonsterLabel" type="Label" parent="."]
 offset_left = 488.0
@@ -145,4 +106,3 @@ offset_right = 592.0
 offset_bottom = 31.0
 text = "0/100"
 horizontal_alignment = 2
-metadata/_edit_lock_ = true

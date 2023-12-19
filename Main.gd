@@ -1,6 +1,7 @@
 extends Node2D
 
-const NB_MONSTER = 5
+const SCREEN_W = 600
+const SCREEN_H = 1000
 
 const waves = preload("res://waves.gd").new().waves
 
@@ -15,13 +16,14 @@ const monsters := {
 enum {YOU, BOT}
 
 class Player:
+	var maxMonster = 40
 	var gold := 100000.0
 	var nbrMonster = 0
 	var monsters := {}
 	var belong := YOU
 
 	var spawnQueue := {
-		"knife" : 100000,
+		"knife" : 0,
 		"flame" : 0,
 	}
 		
@@ -63,7 +65,7 @@ func spawnMonster(_player : Player, Monster : PackedScene):
 	var monster = Monster.instantiate()
 	monster.init(_player)
 	monster.position.x = randi_range(50,450)
-	monster.position.y = randi_range(50,950)
+	monster.position.y = randi_range(50,500)
 	_player.monsters[monster.get_instance_id()] = monster
 	$BattleScene.add_child(monster)
 
@@ -86,8 +88,7 @@ func handleWaves():
 		
 
 func updateHudNumber():
-	#$NbrMonsterLabel.text = str(players[YOU].monsters.keys().size() + players[YOU].spawnQueue.size()) + " / 100"
-	$NbrMonsterLabel.text = "69420 / 100"
+	$NbrMonsterLabel.text = str(players[YOU].nbrMonster) + " / " + str(players[YOU].maxMonster)
 
 func processQueue(player):
 	var keys = player.spawnQueue.keys()
@@ -95,10 +96,10 @@ func processQueue(player):
 	while true:
 		while true:
 			var found = false
-			if player.nbrMonster < 80:
+			if player.nbrMonster < player.maxMonster:
 				keys.shuffle()
 				for key in keys:
-					if player.nbrMonster >= 80:
+					if player.nbrMonster >= player.maxMonster:
 						break
 					if player.spawnQueue[key] > 0:
 						spawnMonster(player, monsters[key])
@@ -106,18 +107,16 @@ func processQueue(player):
 						player.spawnQueue[key] += -1
 			if not found:
 				break
+		updateHudNumber()
 		await get_tree().create_timer(0.1).timeout
 
 
 func _ready():
-	$Shop.visible = false
 	$ShopButton.pressed.connect(handleShopButton)
-	$Shop.addMonsterCard(Knife)
-	$Shop.addMonsterCard(Flame)
 	setInterval(0.5, calculateGold)
 	for player in [players[YOU], players[BOT]]:
 		processQueue(player)
-	#handleWaves()
+	handleWaves()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
