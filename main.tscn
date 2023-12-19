@@ -140,6 +140,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Each click add 5 item to the battlefield"
 
 [node name="ShopButton" type="Button" parent="."]
+visible = false
 z_index = 1
 offset_left = 236.0
 offset_top = 904.0

@@ -27,7 +27,7 @@ func addMonsterCard(Monster:PackedScene):
 	card.get_node("Sprite2D").texture = infos["card"]["image"]
 	add_child(card)
 	card.get_node("ClickArea").pressed.connect(func(): 
-		for i in range(5):
+		for i in range(50):
 			if (Main.players[Types.YOU].gold >= infos.gold):
 				Main.players[Types.YOU].gold += -infos.gold
 				Main.players[Types.YOU].spawnQueue.append(Monster)

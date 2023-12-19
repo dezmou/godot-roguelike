@@ -14,6 +14,7 @@ var attack := 10.0
 var precision := 10.0
 var speed := 1.0
 
+var active = true
 var type = "base"
 var player : Types.Player
 var currentTargetPosition = null
@@ -42,13 +43,17 @@ func _ready():
 	max_contacts_reported = 1
 	body_entered.connect(_onMeet)
 
-func hit(attack : float, fromPosition : Vector2, force : float):
-	health += -attack
-	$rectHealth.scale.x = health / start_health
-	apply_central_impulse(fromPosition.direction_to(position) * BASE_IMPULSE_FORCE * force)
+func hit(_attack : float, fromPosition : Vector2, force : float):
+	if not active: return
+	health += -_attack
 	if health <= 0:
+		active = false
+		player.nbrMonster += -1
 		player.monsters.erase(get_instance_id())
 		queue_free()
+	else:
+		$rectHealth.scale.x = health / start_health
+		apply_central_impulse(fromPosition.direction_to(position) * BASE_IMPULSE_FORCE * force)
 
 
 func onHit(bully : RigidBody2D, force : float):

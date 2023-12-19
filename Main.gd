@@ -7,21 +7,26 @@ const waves = preload("res://waves.gd").new().waves
 const Knife = preload("res://monsters/knife/knife.tscn")
 const Flame = preload("res://monsters/flame/flame.tscn")
 
+const monsters := {
+	"knife" : Knife,
+	"flame" : Flame,
+}
+
 enum {YOU, BOT}
 
 class Player:
-	var gold := 100.0
+	var gold := 100000.0
+	var nbrMonster = 0
 	var monsters := {}
 	var belong := YOU
-	var starter = {
-		YOU : [Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife] as Array[PackedScene],
-		BOT : [Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife,Knife] as Array[PackedScene],
+
+	var spawnQueue := {
+		"knife" : 0,
+		"flame" : 500000,
 	}
-	var spawnQueue : Array[PackedScene] = []
 		
 	func _init(_belong):
 		belong = _belong
-		spawnQueue = starter[_belong]
 
 var players := {
 	BOT : Player.new(BOT),
@@ -53,54 +58,57 @@ func handleShopButton():
 	$BattleScene.get_tree().paused = true
 	$Shop.visible = true
 
-func spawnMonster(player : Player, Monster : PackedScene):
+func spawnMonster(_player : Player, Monster : PackedScene):
+	_player.nbrMonster += 1
 	var monster = Monster.instantiate()
-	monster.init(player)
+	monster.init(_player)
 	monster.position.x = randi_range(50,450)
 	monster.position.y = randi_range(50,950)
-	player.monsters[monster.get_instance_id()] = monster
+	_player.monsters[monster.get_instance_id()] = monster
 	$BattleScene.add_child(monster)
 
 func updateGold(player):
 	$GoldLabel.text = "gold :" + str(int(player.gold))
 
 func calculateGold():
+	print(players[YOU].nbrMonster, players[BOT].nbrMonster)
 	var goldAdd := 0.0
 	for monster in players[YOU].monsters.values() as Array[RigidBody2D]:
 		goldAdd += monster.gold * 0.05
 	players[YOU].gold = players[YOU].gold + goldAdd
 	updateGold(players[YOU])
 
-func newWave():
-	for i in randi_range(0,15):
-		players[BOT].spawnQueue.append(Knife)
-	for i in randi_range(0,10):
-		players[BOT].spawnQueue.append(Flame)
-
 func handleWaves():
 	for wave in waves:
 		await get_tree().create_timer(wave["wait"]).timeout
 		for monsterBloc in wave["monsters"]:
 			for i in monsterBloc["nbr"]:
-				players[BOT].spawnQueue.append(monsterBloc["type"])
+				players[BOT].spawnQueue[monsterBloc["type"]] += 1
 		
 
 func updateHudNumber():
-	$NbrMonsterLabel.text = str(players[YOU].monsters.keys().size() + players[YOU].spawnQueue.size()) + " / 100"
+	#$NbrMonsterLabel.text = str(players[YOU].monsters.keys().size() + players[YOU].spawnQueue.size()) + " / 100"
+	$NbrMonsterLabel.text = "69420 / 100"
 
-func processQueue():
-	updateHudNumber()
-	for player in [players[YOU], players[BOT]]:
-		var space = true
-		var overflow : Array[PackedScene] = []
-		for Monster in player.spawnQueue:
-			if player.monsters.keys().size() >= 100:
-				space = false
-			if space == false:
-				overflow.append(Monster)
-			else:
-				spawnMonster(player, Monster)
-		player.spawnQueue = overflow
+func processQueue(player):
+	var keys = player.spawnQueue.keys()
+	
+	while true:
+		while true:
+			var found = false
+			if player.nbrMonster < 5:
+				keys.shuffle()
+				for key in keys:
+					if player.nbrMonster >= 5:
+						break
+					if player.spawnQueue[key] > 0:
+						spawnMonster(player, monsters[key])
+						found = true
+						player.spawnQueue[key] += -1
+			if not found:
+				break
+		await get_tree().create_timer(0.1).timeout
+
 
 func _ready():
 	$Shop.visible = false
@@ -108,8 +116,9 @@ func _ready():
 	$Shop.addMonsterCard(Knife)
 	$Shop.addMonsterCard(Flame)
 	setInterval(0.5, calculateGold)
-	setInterval(0.1, processQueue)
-	handleWaves()
+	for player in [players[YOU], players[BOT]]:
+		processQueue(player)
+	#handleWaves()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
