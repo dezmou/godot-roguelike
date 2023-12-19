@@ -22,7 +22,7 @@ class Player:
 
 	var spawnQueue := {
 		"knife" : 100000,
-		"flame" : 100000,
+		"flame" : 0,
 	}
 		
 	func _init(_belong):

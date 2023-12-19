@@ -23,12 +23,6 @@ const isMonster = true
 
 func init(_player):
 	player = _player
-	if player.belong == Types.BOT:
-		set_collision_layer_value(1, true)
-		set_collision_mask_value(2,true)
-	else:
-		set_collision_layer_value(2, true)
-		set_collision_mask_value(1,true)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -92,6 +86,39 @@ func getGoForce():
 	return null
 
 func _physics_process(delta):
+	if position.y < 550:
+		if player.belong == Types.BOT:
+			set_collision_layer_value(1, true)
+			set_collision_mask_value(2,true)
+		else:
+			set_collision_layer_value(2, true)
+			set_collision_mask_value(1,true)
+
+	if position.y > 450:
+		if player.belong == Types.BOT:
+			set_collision_layer_value(11, true)
+			set_collision_mask_value(12,true)
+		else:
+			set_collision_layer_value(12, true)
+			set_collision_mask_value(11,true)
+
+	if position.y > 550:
+		if player.belong == Types.BOT:
+			set_collision_layer_value(1, false)
+			set_collision_mask_value(2,false)
+		else:
+			set_collision_layer_value(2, false)
+			set_collision_mask_value(1,false)
+
+	if position.y < 450:
+		if player.belong == Types.BOT:
+			set_collision_layer_value(11, false)
+			set_collision_mask_value(12,false)
+		else:
+			set_collision_layer_value(12, false)
+			set_collision_mask_value(11,false)
+
+		
 	var force = getGoForce()
 	if force:
 		apply_central_force(force)
