@@ -126,6 +126,9 @@ func _ready():
 		processQueue(player)
 	handleWaves()
 	createShop()
+	$Control.get_node("NewGame").pressed.connect(func(): 
+		get_tree().reload_current_scene()
+	)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

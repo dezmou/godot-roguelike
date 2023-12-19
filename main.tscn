@@ -24,13 +24,20 @@ layout_mode = 3
 anchors_preset = 0
 offset_top = 552.0
 offset_right = 600.0
-offset_bottom = 1000.0
+offset_bottom = 1096.0
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
 layout_mode = 0
 offset_right = 600.0
 offset_bottom = 544.0
 color = Color(0.823529, 0.823529, 0.823529, 1)
+
+[node name="NewGame" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 496.0
+offset_right = 602.0
+offset_bottom = 96.0
+text = "New game"
 
 [node name="BattleScene" type="Node2D" parent="."]
 z_index = 1
