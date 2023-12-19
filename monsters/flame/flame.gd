@@ -12,8 +12,9 @@ const infos = {
 	"health" : 30,	
 	"attack" : 0,
 	"precision" : 0,
-	"speed" : 0.8,
+	"speed" : 0.9,
 	"gold" : 5.0,
+	"gain" : 1,
 }
 
 var sprites = {

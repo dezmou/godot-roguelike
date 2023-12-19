@@ -21,7 +21,7 @@ enum {YOU, BOT}
 
 class Player:
 	var maxMonster = 40
-	var gold := 100.0
+	var gold := 10.0
 	var nbrMonster = 0
 	var monsters := {}
 	var belong := YOU
@@ -73,7 +73,7 @@ func updateGold(player):
 func calculateGold():
 	var goldAdd := 0.0
 	for monster in players[YOU].monsters.values() as Array[RigidBody2D]:
-		goldAdd += monster.gold * 0.05
+		goldAdd += monster.gold * 0.05 * 0.2
 	players[YOU].gold = players[YOU].gold + goldAdd
 	updateGold(players[YOU])
 
@@ -121,7 +121,7 @@ func createShop():
 		columns.append(column)
 
 func _ready():
-	setInterval(1.0, calculateGold)
+	setInterval(0.2, calculateGold)
 	for player in [players[YOU], players[BOT]]:
 		processQueue(player)
 	handleWaves()

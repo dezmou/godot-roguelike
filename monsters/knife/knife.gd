@@ -11,7 +11,8 @@ const infos = {
 	"attack" : 10,
 	"precision" : 10,
 	"speed" : 1,
-	"gold" : 5.0
+	"gold" : 6.0,
+	"gain" : 1.0,
 }
 
 var sprites = {

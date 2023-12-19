@@ -31,6 +31,7 @@ func init(monster : PackedScene, index : int):
 	$Image.texture = infos["card"]["image"]
 	
 	$Add1.text = "Add 1\n$" + str(infos.gold)
+	$Add1.disabled = true
 	$Add1.pressed.connect(func(): 
 		player.spawnQueue[infos.name] += 1
 		player.gold += -add1Price
@@ -38,6 +39,7 @@ func init(monster : PackedScene, index : int):
 	)
 	
 	$Add5.text = "Add 5\n$" + str(add5Price)
+	$Add5.disabled = true
 	$Add5.pressed.connect(func(): 
 		player.spawnQueue[infos.name] += 5
 		player.gold += -add5Price
@@ -45,6 +47,7 @@ func init(monster : PackedScene, index : int):
 	)
 	
 	$Add10.text = "Add 10\n$" + str(add10Price)
+	$Add10.disabled = true
 	$Add10.pressed.connect(func(): 
 		player.spawnQueue[infos.name] += 10
 		player.gold += -add10Price
