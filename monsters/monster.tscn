@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqaxu668bw6mt"]
+[gd_scene load_steps=4 format=3 uid="uid://bqaxu668bw6mt"]
 
 [ext_resource type="Script" path="res://monsters/monster.gd" id="1_hs6y5"]
+[ext_resource type="Texture2D" uid="uid://cbjdm0sjns5ot" path="res://art/close.png" id="2_b42w6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f5kpd"]
 radius = 11.0454
@@ -28,3 +29,8 @@ offset_top = 14.0
 offset_right = 12.0
 offset_bottom = 17.0
 color = Color(0, 0.556863, 0.345098, 1)
+
+[node name="Close" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_b42w6")

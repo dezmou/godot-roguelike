@@ -9,5 +9,5 @@ const waves := [
 	#{"wait" : 10.0, "monsters" : [{"type" : "knife", "nbr" : 15}, {"type" : "flame","nbr" : 7}]},
 	#{"wait" : 5.0, "monsters" : [{"type" : "knife", "nbr" : 22}, {"type" : "flame","nbr" : 10}]},
 	{"wait" : 0.0, "monsters" : [{"type" : "knife", "nbr" : 30}, {"type" : "flame","nbr" : 15}]},
-	{"wait" : 10.0, "monsters" : [{"type" : "knife", "nbr" : 80}, {"type" : "flame","nbr" : 60}]},
+	#{"wait" : 10.0, "monsters" : [{"type" : "knife", "nbr" : 80}, {"type" : "flame","nbr" : 60}]},
 ]

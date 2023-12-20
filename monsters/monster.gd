@@ -47,6 +47,8 @@ func onWillDie():
 	pass
 
 func end_die():
+	$Close.visible = true
+	await get_tree().create_timer(0.5).timeout
 	queue_free()
 
 
@@ -61,11 +63,11 @@ func die():
 func hit(_attack : float, fromPosition : Vector2, force : float):
 	if not active: return
 	health += -_attack
+	apply_central_impulse(fromPosition.direction_to(position) * BASE_IMPULSE_FORCE * force)
 	if health <= 0:
 		die()
 	else:
 		$rectHealth.scale.x = health / start_health
-		apply_central_impulse(fromPosition.direction_to(position) * BASE_IMPULSE_FORCE * force)
 
 
 func onHit(bully : RigidBody2D, force : float):
