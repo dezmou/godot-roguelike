@@ -13,7 +13,6 @@ var health := start_health
 var attack := 10.0
 var precision := 10.0
 var speed := 1.0
-var gain = 0.0
 
 var active = true
 var type = "base"
@@ -21,6 +20,17 @@ var player : Types.Player
 var currentTargetPosition = null
 
 const isMonster = true
+
+func spawnAnimation():
+	var initialScale = $Sprite2D.scale;
+	$Sprite2D.scale.x = 0.0
+	$Sprite2D.scale.y = 0.0
+	var tween = get_tree().create_tween()
+	tween.tween_property($Sprite2D, "scale", initialScale, 0.2)
+	
+	#tween.tween_property($Sprite2D, "modulate", Color.RED, 1)
+	#tween.tween_callback($Sprite2D.queue_free)
+
 
 func init(_player):
 	player = _player
@@ -42,6 +52,7 @@ func _ready():
 	contact_monitor = true
 	max_contacts_reported = 1
 	body_entered.connect(_onMeet)
+	spawnAnimation()
 
 func onWillDie():
 	pass

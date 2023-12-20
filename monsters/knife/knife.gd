@@ -12,7 +12,6 @@ const infos = {
 	"precision" : 10,
 	"speed" : 1,
 	"gold" : 5.0,
-	"gain" : 0.5,
 }
 
 var sprites = {
@@ -28,7 +27,6 @@ func _ready():
 	attack = infos.attack
 	precision = infos.precision
 	gold = infos.gold
-	gain = infos.gain
 	$Sprite2D.texture = sprites[player.belong]
 	type = "knife"
 	super._ready()

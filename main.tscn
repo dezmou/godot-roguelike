@@ -79,6 +79,7 @@ position = Vector2(-212, 476)
 shape = SubResource("RectangleShape2D_axdr3")
 
 [node name="Top" type="Area2D" parent="BattleScene"]
+visible = false
 collision_layer = 0
 collision_mask = 271
 gravity_space_override = 1

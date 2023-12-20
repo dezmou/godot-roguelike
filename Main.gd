@@ -74,10 +74,6 @@ func updateGold(player):
 		column.checkGold()
 
 func calculateGold():
-	var goldAdd := 0.0
-	for monster in players[YOU].monsters.values() as Array[RigidBody2D]:
-		goldAdd += monster.gain * 0.2
-	players[YOU].gold = players[YOU].gold + goldAdd
 	updateGold(players[YOU])
 
 func handleWaves():

@@ -56,7 +56,6 @@ func init(monster : PackedScene, index : int):
 
 	$Infos.text = "[center]" + \
 		"Cost $" + str(int(infos.gold)) + "\n" \
-		+ "Gain $" + str(infos.gain) + "/s" + "\n\n" \
 		+ "ATK " + str(infos.attack) + "\n" \
 		+ "HP " + str(infos.health) + "\n" \
 		+ "PRE " + str(infos.precision) + "\n" \
