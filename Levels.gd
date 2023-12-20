@@ -7,7 +7,7 @@ const Bomb = preload("res://monsters/bomb/bomb.tscn")
 const Types = preload("res://Main.gd")
 @onready var Main = get_node("/root/Main")
 
-var levelIndex := 5
+var levelIndex := 0
 
 const texts = {
 	0 : 	"""
@@ -69,6 +69,13 @@ take care of it
 """,
 
 6 :"""
+Noice
+
+You won $50
+
+""",
+
+7 :"""
 You won the demo !
 
 You won $69420
@@ -159,22 +166,53 @@ func launchLevel():
 		var monster = Knife.instantiate()
 		monster.disableSpriteAnimation = true
 		monster.get_node("Sprite2D").scale = Vector2(2.0, 2.0)
-		monster.get_node("CollisionShape2D").shape.radius *= 3
+		var shape = monster.get_node("CollisionShape2D").shape.duplicate()
+		shape.radius *= 3
+		monster.get_node("CollisionShape2D").shape = shape
 		Main.applySpawnMonster(bot, monster)
 		monster.attack = 100.0
 		monster.start_health = 300.0
 		monster.health = 300.0
-		monster.speed = 0.1
+		#monster.speed = 0.1
+		monster.mass *= 5
 		monster.precision = 1000.0
+		bot.spawnQueue["knife"] = 2
+		bot.spawnQueue["flame"] = 2
+
 
 		while true:
 			await get_tree().create_timer(1.0).timeout
 			if (bot.monsters.keys().size() == 0):
 				await get_tree().create_timer(1.5).timeout
+				you.gold += 50.0
+				return win()
+
+	if levelIndex == 6:
+		bot.maxMonster = 40
+		bot.spawnQueue["flame"] = 50
+		while true:
+			await get_tree().create_timer(1.0).timeout
+			if (bot.monsters.keys().size() == 0):
+				break
+
+		bot.spawnQueue["bomb"] = 2
+		while true:
+			await get_tree().create_timer(1.0).timeout
+			if (bot.monsters.keys().size() == 0):
+				break
+
+		bot.spawnQueue["knife"] = 15
+		bot.spawnQueue["flame"] = 15
+		while true:
+			await get_tree().create_timer(1.0).timeout
+			if (bot.monsters.keys().size() == 0):
+				await get_tree().create_timer(1.5).timeout
+				you.gold += 69420.0
 				return win()
 
 
-	if levelIndex == 6:
+
+	if levelIndex == 7:
 		bot.maxMonster = 40
 		bot.spawnQueue["flame"] = 100000
 		bot.spawnQueue["knife"] = 100000
