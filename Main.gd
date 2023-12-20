@@ -3,8 +3,6 @@ extends Node2D
 const SCREEN_W = 600
 const SCREEN_H = 1000
 
-const waves = preload("res://waves.gd").new().waves
-
 const Knife = preload("res://monsters/knife/knife.tscn")
 const Flame = preload("res://monsters/flame/flame.tscn")
 const Bomb = preload("res://monsters/bomb/bomb.tscn")
@@ -23,7 +21,7 @@ enum {YOU, BOT}
 
 class Player:
 	var maxMonster = 40
-	var gold := 9999999.0
+	var gold := 15.0
 	var nbrMonster = 0
 	var monsters := {}
 	var belong := YOU
@@ -58,6 +56,12 @@ func getAllMonsters() -> Array[RigidBody2D]:
 	res.assign(players[BOT].monsters.values() + players[YOU].monsters.values())
 	return res
 	
+func emptyBoard():
+	for player in players.values():
+		for monster in player.monsters.values():
+			monster.queue_free()
+		player.nbrMonster = 0;
+		player.monsters = {}
 
 func spawnMonster(_player : Player, Monster : PackedScene):
 	_player.nbrMonster += 1
@@ -77,11 +81,16 @@ func calculateGold():
 	updateGold(players[YOU])
 
 func handleWaves():
-	for wave in waves:
-		await get_tree().create_timer(wave["wait"]).timeout
-		for monsterBloc in wave["monsters"]:
-			for i in monsterBloc["nbr"]:
-				players[BOT].spawnQueue[monsterBloc["type"]] += 1
+	$InfoModal.get_node("goButton").pressed.connect(func():
+		$Levels.onModalClosed()
+	)
+	pass
+	#$Levels.init()
+	#for wave in waves:
+		#await get_tree().create_timer(wave["wait"]).timeout
+		#for monsterBloc in wave["monsters"]:
+			#for i in monsterBloc["nbr"]:
+				#players[BOT].spawnQueue[monsterBloc["type"]] += 1
 		
 
 func updateHudNumber():
@@ -128,6 +137,9 @@ func _ready():
 	createShop()
 	$Control.get_node("NewGame").pressed.connect(func(): 
 		get_tree().reload_current_scene()
+	)
+	$Control.get_node("Cheat").pressed.connect(func(): 
+		players[YOU].gold = 694200
 	)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
