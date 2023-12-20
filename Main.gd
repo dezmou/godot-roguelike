@@ -23,7 +23,7 @@ enum {YOU, BOT}
 
 class Player:
 	var maxMonster = 40
-	var gold := 1500.0
+	var gold := 9999999.0
 	var nbrMonster = 0
 	var monsters := {}
 	var belong := YOU

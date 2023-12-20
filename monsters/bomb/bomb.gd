@@ -33,9 +33,11 @@ func applyShock(monster : RigidBody2D):
 
 func onWillDie():
 	for monster in Main.players[Types.YOU].monsters.values() as Array[RigidBody2D]:
-		applyShock(monster)
+		if (monster.type != "Bomb"):
+			applyShock(monster)
 	for monster in Main.players[Types.BOT].monsters.values() as Array[RigidBody2D]:
-		applyShock(monster)
+		if (monster.type != "Bomb"):
+			applyShock(monster)
 
 
 # Called when the node enters the scene tree for the first time.
