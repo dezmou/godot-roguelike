@@ -21,12 +21,15 @@ var currentTargetPosition = null
 
 const isMonster = true
 
+var disableSpriteAnimation = false
+
 func spawnAnimation():
-	var initialScale = $Sprite2D.scale;
-	$Sprite2D.scale.x = 0.0
-	$Sprite2D.scale.y = 0.0
-	var tween = get_tree().create_tween()
-	tween.tween_property($Sprite2D, "scale", initialScale, 0.2)
+	if not disableSpriteAnimation:
+		var initialScale = $Sprite2D.scale;
+		$Sprite2D.scale.x = 0.0
+		$Sprite2D.scale.y = 0.0
+		var tween = get_tree().create_tween()
+		tween.tween_property($Sprite2D, "scale", initialScale, 0.2)
 	
 	#tween.tween_property($Sprite2D, "modulate", Color.RED, 1)
 	#tween.tween_callback($Sprite2D.queue_free)

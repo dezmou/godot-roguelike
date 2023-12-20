@@ -62,15 +62,21 @@ func emptyBoard():
 			monster.queue_free()
 		player.nbrMonster = 0;
 		player.monsters = {}
+		for key in player.spawnQueue.keys():
+			player.spawnQueue[key] = 0
 
-func spawnMonster(_player : Player, Monster : PackedScene):
+
+func applySpawnMonster(_player : Player, monster : RigidBody2D):
 	_player.nbrMonster += 1
-	var monster = Monster.instantiate()
 	monster.init(_player)
 	monster.position.x = randi_range(50,450)
 	monster.position.y = randi_range(50,500)
 	_player.monsters[monster.get_instance_id()] = monster
 	$BattleScene.add_child(monster)
+
+func spawnMonster(_player : Player, Monster : PackedScene):
+	var monster = Monster.instantiate()
+	applySpawnMonster(_player, monster)
 
 func updateGold(player):
 	$GoldLabel.text = "$" + str(int(player.gold))
@@ -84,7 +90,6 @@ func handleWaves():
 	$InfoModal.get_node("goButton").pressed.connect(func():
 		$Levels.onModalClosed()
 	)
-	pass
 	#$Levels.init()
 	#for wave in waves:
 		#await get_tree().create_timer(wave["wait"]).timeout
