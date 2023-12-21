@@ -29,17 +29,6 @@ Now fight all those monsters !
 	""",
 	
 	2 : """
-You got this 
-
-You won $0
-
-No gold left for the next battle ?
-Find someone who care
-
-	""",
-	
-	3 : """
-Wise man
 
 You won $100
 
@@ -51,7 +40,7 @@ I you buy more, they wait in the queue ( top right corner of the screen)
 
 	""",
 	
-4 :"""
+3 :"""
 Not bad 
 
 + $150
@@ -59,7 +48,7 @@ Not bad
 Ennemy can also spawn during battle
 """,
 
-5 :"""
+4 :"""
 Not bad 
 
 + $150
@@ -68,22 +57,21 @@ Oh no, the big Glurmo entered the scene
 take care of it
 """,
 
-6 :"""
+5 :"""
 Noice
 
-You won $50
+You won $150
 
 """,
 
-7 :"""
-You won the demo !
+6 :"""
+You finished the tutorial
 
-You won $69420
 
-Now please enjoy this endless battle
 """
 }
 
+var skippedByMain = false
 
 func onModalClosed():
 	Main.get_node("InfoModal").visible = false;
@@ -111,6 +99,7 @@ func launchLevel():
 		Main.spawnMonster(bot, Knife)
 		while true:
 			await get_tree().create_timer(1.0).timeout
+			if (skippedByMain): return
 			if (bot.monsters.keys().size() == 0):
 				await get_tree().create_timer(1.5).timeout
 				you.gold += 30.0
@@ -121,22 +110,13 @@ func launchLevel():
 			Main.spawnMonster(bot, Knife)
 		while true:
 			await get_tree().create_timer(1.0).timeout
+			if (skippedByMain): return
 			if (bot.monsters.keys().size() == 0):
 				await get_tree().create_timer(1.5).timeout
 				return win()
+
 
 	if levelIndex == 2:
-		for i in range(1):
-			Main.spawnMonster(bot, Knife)
-		while true:
-			await get_tree().create_timer(1.0).timeout
-			if (bot.monsters.keys().size() == 0):
-				you.gold += 100.0
-				await get_tree().create_timer(1.5).timeout
-				return win()
-
-
-	if levelIndex == 3:
 		for i in range(15):
 			Main.spawnMonster(bot, Knife)
 		for i in range(7):
@@ -144,24 +124,26 @@ func launchLevel():
 
 		while true:
 			await get_tree().create_timer(1.0).timeout
+			if (skippedByMain): return
 			if (bot.monsters.keys().size() == 0):
 				you.gold += 150.0
 				await get_tree().create_timer(1.5).timeout
 				return win()
 
 	
-	if levelIndex == 4:
+	if levelIndex == 3:
 		bot.maxMonster = 5
 		bot.spawnQueue["flame"] = 10
 		bot.spawnQueue["knife"] = 10
 		while true:
 			await get_tree().create_timer(1.0).timeout
+			if (skippedByMain): return
 			if (bot.monsters.keys().size() == 0):
 				await get_tree().create_timer(1.5).timeout
 				you.gold += 150.0
 				return win()
 
-	if levelIndex == 5:
+	if levelIndex == 4:
 		bot.maxMonster = 40
 		var monster = Knife.instantiate()
 		monster.disableSpriteAnimation = true
@@ -182,22 +164,25 @@ func launchLevel():
 
 		while true:
 			await get_tree().create_timer(1.0).timeout
+			if (skippedByMain): return
 			if (bot.monsters.keys().size() == 0):
 				await get_tree().create_timer(1.5).timeout
-				you.gold += 50.0
+				you.gold += 150.0
 				return win()
 
-	if levelIndex == 6:
+	if levelIndex == 5:
 		bot.maxMonster = 40
 		bot.spawnQueue["flame"] = 50
 		while true:
 			await get_tree().create_timer(1.0).timeout
+			if (skippedByMain): return
 			if (bot.monsters.keys().size() == 0):
 				break
 
 		bot.spawnQueue["bomb"] = 2
 		while true:
 			await get_tree().create_timer(1.0).timeout
+			if (skippedByMain): return
 			if (bot.monsters.keys().size() == 0):
 				break
 
@@ -205,20 +190,34 @@ func launchLevel():
 		bot.spawnQueue["flame"] = 15
 		while true:
 			await get_tree().create_timer(1.0).timeout
+			if (skippedByMain): return
 			if (bot.monsters.keys().size() == 0):
 				await get_tree().create_timer(1.5).timeout
 				you.gold += 69420.0
 				return win()
 
 	
+########################################################## END TUTORIAL
 
-	if levelIndex == 7:
+	if levelIndex == 6:
+		skippedByMain = false
+		Main.get_node("Control/SkipTutorial").visible = false
+		you.gold = 300
 		bot.maxMonster = 40
-		bot.spawnQueue["flame"] = 100000
-		bot.spawnQueue["knife"] = 100000
-		#while true:
-			#await get_tree().create_timer(1.0).timeout
-			#if (bot.monsters.keys().size() == 0):
-				#await get_tree().create_timer(1.5).timeout
-				#you.gold += 150.0
-				#return win()
+		bot.spawnQueue["knife"] = 10
+		bot.spawnQueue["bomb"] = 1
+		while true:
+			await get_tree().create_timer(1.0).timeout
+			if (skippedByMain): return
+			if (bot.monsters.keys().size() == 0):
+				break
+
+		while true:
+			bot.spawnQueue["knife"] = 200
+			bot.spawnQueue["flame"] = 200
+			await get_tree().create_timer(1.0).timeout
+			if (skippedByMain): return
+			if (bot.monsters.keys().size() == 0):
+				break
+
+

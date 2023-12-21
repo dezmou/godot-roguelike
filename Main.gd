@@ -177,6 +177,7 @@ func _ready():
 	handleWaves()
 	createShop()
 	$Control.get_node("NewGame").pressed.connect(func(): 
+		$Control/SkipTutorial.visible = true
 		get_tree().reload_current_scene()
 	)
 	$Control.get_node("Cheat").pressed.connect(func(): 
@@ -200,15 +201,21 @@ func _ready():
 		players[YOU].gold += -items[selectedItemIndex].price10
 		calculateGold()
 	)
+	$Control/SkipTutorial.pressed.connect(func():
+		emptyBoard()
+		$Levels.levelIndex = 6
+		$Levels.skippedByMain = true
+		$Levels.showModal()
+	)
 	$Control/InfoButton.pressed.connect(func():
 		displayMonsterInfos()
 	)
 	$MonsterInfos/Close.pressed.connect(func():
 		$MonsterInfos.visible = false
 	)
+	
 
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
