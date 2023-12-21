@@ -14,6 +14,24 @@ const infos = {
 	"gold" : 40.0,
 }
 
+var text = """
+[center][font_size={35}]The Bomb[/font_size]
+[img=450x450]res://art/bomb_card.png[/img]
+[/center]
+
+[font_size={30}][color=#7e6e33]Price : $%s[/color][/font_size]
+[font_size={30}][color=green]Health : %s[/color][/font_size]
+
+[font_size={22}]Does not attack but explode when die
+Explosion damage up to [color=red]%s[/color]
+Deal friendly damage[/font_size]
+
+""" % [
+	str(infos.gold), 
+	str(infos.health),
+	str(infos.attack), 
+]
+
 var sprites = {
 	Types.BOT : preload("res://art/bomb_red.png"),
 	Types.YOU : preload("res://art/bomb_blue.png"),

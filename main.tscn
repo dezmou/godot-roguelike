@@ -154,12 +154,31 @@ offset_top = 16.0
 offset_right = 584.0
 offset_bottom = 1080.0
 
+[node name="Close" type="Button" parent="MonsterInfos"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 24.0
+offset_right = 552.0
+offset_bottom = 1040.0
+text = "dsfdsf"
+
 [node name="ColorRect" type="ColorRect" parent="MonsterInfos"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 24.0
 offset_right = 552.0
 offset_bottom = 1040.0
+mouse_filter = 2
+
+[node name="Text" type="RichTextLabel" parent="MonsterInfos"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 32.0
+offset_right = 544.0
+offset_bottom = 1032.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
 
 [node name="InfoModal" type="Control" parent="."]
 visible = false

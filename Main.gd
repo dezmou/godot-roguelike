@@ -91,13 +91,13 @@ func spawnMonster(_player : Player, Monster : PackedScene):
 func updateGold(player):
 	$GoldLabel.text = "$" + str(int(player.gold))
 	var item = items[selectedItemIndex]
-	$Control/Add1.disabled = players[YOU].gold < item.monster.infos["gold"]
-	$Control/Add5.disabled = players[YOU].gold < item.monster.infos["gold"] * 5
-	$Control/Add10.disabled = players[YOU].gold < item.monster.infos["gold"] * 10
+	$Control/Add1.disabled = players[YOU].gold < item.price1
+	$Control/Add5.disabled = players[YOU].gold < item.price5
+	$Control/Add10.disabled = players[YOU].gold < item.price10
 
-	$Control/Add1.text = "Buy 1\n$" + str(item.monster.infos["gold"])
-	$Control/Add5.text = "Buy 5\n$" + str(item.monster.infos["gold"] * 5)
-	$Control/Add10.text = "Buy 10\n$" + str(item.monster.infos["gold"] * 10)
+	$Control/Add1.text = "Buy 1\n$" + str(item.price1)
+	$Control/Add5.text = "Buy 5\n$" + str(item.price5)
+	$Control/Add10.text = "Buy 10\n$" + str(item.price10)
 
 
 func calculateGold():
@@ -152,8 +152,8 @@ func createShop():
 		item.monster = Monster.instantiate()
 		item.control = ItemControl.instantiate()
 		item.price1 = item.monster.infos["gold"]
-		item.price5 = item.monster.infos["gold"] * 5
-		item.price10 = item.monster.infos["gold"] * 10
+		item.price5 = float(int( item.monster.infos["gold"] * 5 * 0.85))
+		item.price10 = float(int(item.monster.infos["gold"] * 10 * 0.7))
 		$Control.add_child(item.control)
 		item.control.get_node("Texture").texture = item.monster.infos["card"]["image"]
 		item.control.get_node("Selected").visible = true
@@ -163,6 +163,12 @@ func createShop():
 		)
 		items.append(item)
 	clickItem(items[0])
+
+func displayMonsterInfos():
+	var monster = items[selectedItemIndex].monster
+	$MonsterInfos/Text.text = monster.text
+	$MonsterInfos.visible = true;
+	
 
 func _ready():
 	setInterval(0.2, calculateGold)
@@ -174,7 +180,7 @@ func _ready():
 		get_tree().reload_current_scene()
 	)
 	$Control.get_node("Cheat").pressed.connect(func(): 
-		players[YOU].gold = 694200
+		players[YOU].gold += 10000
 	)
 	$Control/Add1.pressed.connect(func():
 		var monster = items[selectedItemIndex].monster;
@@ -195,8 +201,10 @@ func _ready():
 		calculateGold()
 	)
 	$Control/InfoButton.pressed.connect(func():
-		$MonsterInfos.visible = true;
-		pass	
+		displayMonsterInfos()
+	)
+	$MonsterInfos/Close.pressed.connect(func():
+		$MonsterInfos.visible = false
 	)
 
 	

@@ -14,6 +14,25 @@ const infos = {
 	"gold" : 5.0,
 }
 
+var text = """
+[center][font_size={35}]Glurmo[/font_size]
+[img=450x450]res://art/knife_card.png[/img]
+[/center]
+
+[font_size={30}][color=#7e6e33]Price : $%s[/color][/font_size]
+[font_size={30}][color=green]Health : %s[/color][/font_size]
+
+[font_size={22}]Close combat unit
+Attack [color=red]%s[/color] with precision [color=blue]%s[/color][/font_size]
+
+When two monsters meet, the one who strikes is chosen at random, the more precision it has, the more likely it is to hit
+""" % [
+	str(infos.gold), 
+	str(infos.health),
+	str(infos.attack), 
+	str(infos.precision), 
+]
+
 var sprites = {
 	Types.BOT : preload("res://art/monster_red.png"),
 	Types.YOU : preload("res://art/monster_blue.png"),

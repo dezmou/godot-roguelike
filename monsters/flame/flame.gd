@@ -16,6 +16,23 @@ const infos = {
 	"gold" : 6.0,
 }
 
+var text = """
+[center][font_size={35}]Alphonse Flame[/font_size]
+[img=450x450]res://art/flame_card.png[/img]
+[/center]
+
+[font_size={30}][color=#7e6e33]Price : $%s[/color][/font_size]
+[font_size={30}][color=green]Health : %s[/color][/font_size]
+
+[font_size={22}]Long range unit
+5 time pers second, launch flame dealing [color=red]%s[/color][/font_size] 
+
+""" % [
+	str(infos.gold), 
+	str(infos.health),
+	str(infos.attack), 
+]
+
 var sprites = {
 	Types.BOT : preload("res://art/flame_red.png"),
 	Types.YOU : preload("res://art/flame_blue.png"),
