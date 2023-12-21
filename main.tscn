@@ -63,18 +63,18 @@ $15"
 
 [node name="Add5" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 216.0
+offset_left = 224.0
 offset_top = 448.0
-offset_right = 328.0
+offset_right = 336.0
 offset_bottom = 544.0
 text = "Add 5
 $15"
 
 [node name="Add10" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 328.0
+offset_left = 344.0
 offset_top = 448.0
-offset_right = 440.0
+offset_right = 456.0
 offset_bottom = 544.0
 text = "Add 15
 $30"

@@ -8,10 +8,14 @@ const Flame = preload("res://monsters/flame/flame.tscn")
 const Bomb = preload("res://monsters/bomb/bomb.tscn")
 
 #const Column = preload("res://column.tscn")
-const Item = preload("res://Item.tscn")
+const ItemControl = preload("res://Item.tscn")
 
-var items : Array[Control] = [];
+class Item:
+	var control: Control;
+	var monster : RigidBody2D
+
 var selectedItemIndex := 0
+var items : Array[Item] = [];
 
 const monsters := {
 	"knife" : Knife,
@@ -124,21 +128,21 @@ func createShop():
 	var index = -1
 	for Monster in [Knife, Flame, Bomb]:
 		index += 1
-		var monster = Monster.instantiate()
-		var item = Item.instantiate()
-		$Control.add_child(item)
-		item.get_node("Texture").texture = monster.infos["card"]["image"]
-		item.get_node("Selected").visible = true
-		item.position.x = float(index) * item.size.x
+		var item = Item.new()
+		item.monster = Monster.instantiate()
+		item.control = ItemControl.instantiate()
 		items.append(item)
-		item.get_node("Button").pressed.connect(func():
+		$Control.add_child(item.control)
+		item.control.get_node("Texture").texture = item.monster.infos["card"]["image"]
+		item.control.get_node("Selected").visible = true
+		item.control.position.x = float(index) * item.control.size.x
+		item.control.get_node("Button").pressed.connect(func():
 			selectedItemIndex = index
 			for it in items:
-				it.get_node("Color").color = Color(1,1,1)
-			item.get_node("Color").color = Color(0.8,0.2,0.2)
-			
-			pass
+				it.control.get_node("Color").color = Color(1,1,1)
+			item.control.get_node("Color").color = Color(0.8,0.2,0.2)
 		)
+		items.append(item)
 
 func _ready():
 	setInterval(0.2, calculateGold)
