@@ -79,46 +79,12 @@ offset_bottom = 544.0
 text = "Add 15
 $30"
 
-[node name="Button" type="Button" parent="Control"]
+[node name="InfoButton" type="Button" parent="Control"]
 layout_mode = 0
 offset_top = 448.0
 offset_right = 96.0
 offset_bottom = 544.0
 text = "infos"
-
-[node name="InfoModal" type="Control" parent="."]
-visible = false
-z_index = 4001
-layout_mode = 3
-anchors_preset = 0
-offset_left = 24.0
-offset_top = 48.0
-offset_right = 576.0
-offset_bottom = 1064.0
-
-[node name="ColorRect" type="ColorRect" parent="InfoModal"]
-layout_mode = 0
-offset_right = 552.0
-offset_bottom = 1024.0
-color = Color(0.890196, 0.890196, 0.890196, 1)
-
-[node name="goButton" type="Button" parent="InfoModal"]
-layout_mode = 0
-offset_left = 168.0
-offset_top = 904.0
-offset_right = 376.0
-offset_bottom = 976.0
-text = "FIGHT"
-
-[node name="Text" type="RichTextLabel" parent="InfoModal"]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 536.0
-offset_bottom = 880.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 30
-bbcode_enabled = true
 
 [node name="BattleScene" type="Node2D" parent="."]
 z_index = 1
@@ -177,6 +143,57 @@ offset_bottom = 552.0
 texture = ExtResource("2_wgugi")
 expand_mode = 1
 metadata/_edit_lock_ = true
+
+[node name="MonsterInfos" type="Control" parent="."]
+visible = false
+z_index = 4001
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 584.0
+offset_bottom = 1080.0
+
+[node name="ColorRect" type="ColorRect" parent="MonsterInfos"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 24.0
+offset_right = 552.0
+offset_bottom = 1040.0
+
+[node name="InfoModal" type="Control" parent="."]
+visible = false
+z_index = 4001
+layout_mode = 3
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 576.0
+offset_bottom = 1064.0
+
+[node name="ColorRect" type="ColorRect" parent="InfoModal"]
+layout_mode = 0
+offset_right = 552.0
+offset_bottom = 1024.0
+color = Color(0.890196, 0.890196, 0.890196, 1)
+
+[node name="goButton" type="Button" parent="InfoModal"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 904.0
+offset_right = 376.0
+offset_bottom = 976.0
+text = "FIGHT"
+
+[node name="Text" type="RichTextLabel" parent="InfoModal"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 536.0
+offset_bottom = 880.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
 
 [node name="GoldLabel" type="Label" parent="."]
 offset_left = 8.0

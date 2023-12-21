@@ -14,6 +14,9 @@ class Item:
 	var index := 0;
 	var control: Control;
 	var monster : RigidBody2D
+	var price1 := 0
+	var price5 := 0
+	var price10 := 0
 
 var selectedItemIndex := 0
 var items : Array[Item] = [];
@@ -148,6 +151,9 @@ func createShop():
 		item.index = index
 		item.monster = Monster.instantiate()
 		item.control = ItemControl.instantiate()
+		item.price1 = item.monster.infos["gold"]
+		item.price5 = item.monster.infos["gold"] * 5
+		item.price10 = item.monster.infos["gold"] * 10
 		$Control.add_child(item.control)
 		item.control.get_node("Texture").texture = item.monster.infos["card"]["image"]
 		item.control.get_node("Selected").visible = true
@@ -173,20 +179,24 @@ func _ready():
 	$Control/Add1.pressed.connect(func():
 		var monster = items[selectedItemIndex].monster;
 		players[YOU].spawnQueue[monster.infos["name"]] += 1
-		players[YOU].gold += -monster.infos["gold"]
+		players[YOU].gold += -items[selectedItemIndex].price1
 		calculateGold()
 	)
 	$Control/Add5.pressed.connect(func():
 		var monster = items[selectedItemIndex].monster;
 		players[YOU].spawnQueue[monster.infos["name"]] += 5
-		players[YOU].gold += -monster.infos["gold"] * 5
+		players[YOU].gold += -items[selectedItemIndex].price5
 		calculateGold()
 	)
 	$Control/Add10.pressed.connect(func():
 		var monster = items[selectedItemIndex].monster;
 		players[YOU].spawnQueue[monster.infos["name"]] += 10
-		players[YOU].gold += -monster.infos["gold"] * 10
+		players[YOU].gold += -items[selectedItemIndex].price10
 		calculateGold()
+	)
+	$Control/InfoButton.pressed.connect(func():
+		$MonsterInfos.visible = true;
+		pass	
 	)
 
 	

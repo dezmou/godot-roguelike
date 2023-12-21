@@ -30,10 +30,10 @@ mouse_filter = 2
 
 [node name="Texture" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 120.0
-offset_bottom = 120.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 125.0
+offset_bottom = 125.0
 mouse_filter = 2
 texture = ExtResource("1_tnp85")
 expand_mode = 1
