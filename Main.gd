@@ -159,7 +159,6 @@ func createShop():
 	clickItem(items[0])
 
 func _ready():
-	print("READY")
 	setInterval(0.2, calculateGold)
 	for player in [players[YOU], players[BOT]]:
 		processQueue(player)
@@ -172,8 +171,24 @@ func _ready():
 		players[YOU].gold = 694200
 	)
 	$Control/Add1.pressed.connect(func():
-		print(items[selectedItemIndex].monster)
+		var monster = items[selectedItemIndex].monster;
+		players[YOU].spawnQueue[monster.infos["name"]] += 1
+		players[YOU].gold += -monster.infos["gold"]
+		calculateGold()
 	)
+	$Control/Add5.pressed.connect(func():
+		var monster = items[selectedItemIndex].monster;
+		players[YOU].spawnQueue[monster.infos["name"]] += 5
+		players[YOU].gold += -monster.infos["gold"] * 5
+		calculateGold()
+	)
+	$Control/Add10.pressed.connect(func():
+		var monster = items[selectedItemIndex].monster;
+		players[YOU].spawnQueue[monster.infos["name"]] += 10
+		players[YOU].gold += -monster.infos["gold"] * 10
+		calculateGold()
+	)
+
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
