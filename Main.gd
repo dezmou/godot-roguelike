@@ -11,6 +11,7 @@ const Bomb = preload("res://monsters/bomb/bomb.tscn")
 const ItemControl = preload("res://Item.tscn")
 
 class Item:
+	var index := 0;
 	var control: Control;
 	var monster : RigidBody2D
 
@@ -86,8 +87,15 @@ func spawnMonster(_player : Player, Monster : PackedScene):
 
 func updateGold(player):
 	$GoldLabel.text = "$" + str(int(player.gold))
-	#for column in columns:
-		#column.checkGold()
+	var item = items[selectedItemIndex]
+	$Control/Add1.disabled = players[YOU].gold < item.monster.infos["gold"]
+	$Control/Add5.disabled = players[YOU].gold < item.monster.infos["gold"] * 5
+	$Control/Add10.disabled = players[YOU].gold < item.monster.infos["gold"] * 10
+
+	$Control/Add1.text = "Buy 1\n$" + str(item.monster.infos["gold"])
+	$Control/Add5.text = "Buy 5\n$" + str(item.monster.infos["gold"] * 5)
+	$Control/Add10.text = "Buy 10\n$" + str(item.monster.infos["gold"] * 10)
+
 
 func calculateGold():
 	updateGold(players[YOU])
@@ -124,27 +132,34 @@ func processQueue(player):
 		updateHudNumber()
 		await get_tree().create_timer(0.1).timeout
 
+func clickItem(item : Item):
+	selectedItemIndex = item.index
+	for it in items:
+		it.control.get_node("Color").color = Color(1,1,1)
+	item.control.get_node("Color").color = Color(0.8,0.2,0.2)
+	calculateGold()
+
+
 func createShop():
 	var index = -1
 	for Monster in [Knife, Flame, Bomb]:
 		index += 1
 		var item = Item.new()
+		item.index = index
 		item.monster = Monster.instantiate()
 		item.control = ItemControl.instantiate()
-		items.append(item)
 		$Control.add_child(item.control)
 		item.control.get_node("Texture").texture = item.monster.infos["card"]["image"]
 		item.control.get_node("Selected").visible = true
 		item.control.position.x = float(index) * item.control.size.x
 		item.control.get_node("Button").pressed.connect(func():
-			selectedItemIndex = index
-			for it in items:
-				it.control.get_node("Color").color = Color(1,1,1)
-			item.control.get_node("Color").color = Color(0.8,0.2,0.2)
+			clickItem(item)
 		)
 		items.append(item)
+	clickItem(items[0])
 
 func _ready():
+	print("READY")
 	setInterval(0.2, calculateGold)
 	for player in [players[YOU], players[BOT]]:
 		processQueue(player)
@@ -155,6 +170,9 @@ func _ready():
 	)
 	$Control.get_node("Cheat").pressed.connect(func(): 
 		players[YOU].gold = 694200
+	)
+	$Control/Add1.pressed.connect(func():
+		print(items[selectedItemIndex].monster)
 	)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
