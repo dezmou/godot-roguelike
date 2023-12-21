@@ -48,6 +48,9 @@ func applyShock(monster : RigidBody2D):
 	if (shock > 0):
 		monster.hit(damage, position, shock / 200)
 
+func findNearestEnnemy():
+	return null
+
 func onWillDie():
 	for monster in Main.players[Types.YOU].monsters.values() as Array[RigidBody2D]:
 		if (monster.type != "Bomb"):

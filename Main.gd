@@ -6,6 +6,7 @@ const SCREEN_H = 1000
 const Knife = preload("res://monsters/knife/knife.tscn")
 const Flame = preload("res://monsters/flame/flame.tscn")
 const Bomb = preload("res://monsters/bomb/bomb.tscn")
+const Totem = preload("res://monsters/totem/totem.tscn")
 
 #const Column = preload("res://column.tscn")
 const ItemControl = preload("res://Item.tscn")
@@ -25,6 +26,7 @@ const monsters := {
 	"knife" : Knife,
 	"flame" : Flame,
 	"bomb" : Bomb,
+	"totem" : Totem,
 }
 
 enum {YOU, BOT}
@@ -40,6 +42,7 @@ class Player:
 		"knife" : 0,
 		"flame" : 0,
 		"bomb" : 0,
+		"totem" : 0,
 	}
 		
 	func _init(_belong):
@@ -145,7 +148,7 @@ func clickItem(item : Item):
 
 func createShop():
 	var index = -1
-	for Monster in [Knife, Flame, Bomb]:
+	for Monster in [Knife, Flame, Bomb, Totem]:
 		index += 1
 		var item = Item.new()
 		item.index = index

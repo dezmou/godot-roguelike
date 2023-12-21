@@ -67,6 +67,10 @@ You won $150
 6 :"""
 You finished the tutorial
 
+Level 1 
+
+Objective : Reach 1000 gold
+
 
 """
 }
@@ -204,20 +208,39 @@ func launchLevel():
 		Main.get_node("Control/SkipTutorial").visible = false
 		you.gold = 300
 		bot.maxMonster = 40
-		bot.spawnQueue["knife"] = 10
-		bot.spawnQueue["bomb"] = 1
+		bot.spawnQueue["knife"] = 40
 		while true:
-			await get_tree().create_timer(1.0).timeout
-			if (skippedByMain): return
-			if (bot.monsters.keys().size() == 0):
-				break
+			while true:
+				await get_tree().create_timer(1.0).timeout
+				if (skippedByMain): return
+				if (bot.monsters.keys().size() < 22):
+					break
 
-		while true:
-			bot.spawnQueue["knife"] = 200
-			bot.spawnQueue["flame"] = 200
-			await get_tree().create_timer(1.0).timeout
-			if (skippedByMain): return
-			if (bot.monsters.keys().size() == 0):
-				break
+			bot.maxMonster = 17
+			while true:
+				bot.spawnQueue["knife"] = 30
+				bot.spawnQueue["flame"] = 30
+				await get_tree().create_timer(1.0).timeout
+				if (skippedByMain): return
+				if (bot.monsters.keys().size() == 0):
+					break
 
+			bot.maxMonster = 30
+			while true:
+				bot.spawnQueue["knife"] = 40
+				bot.spawnQueue["knife"] = 40
+				bot.spawnQueue["bomb"] = 1
+				await get_tree().create_timer(1.0).timeout
+				if (skippedByMain): return
+				if (bot.monsters.keys().size() == 0):
+					break
+
+			bot.maxMonster = 40
+			while true:
+				bot.spawnQueue["flame"] = 150
+				bot.spawnQueue["bomb"] = 1
+				await get_tree().create_timer(1.0).timeout
+				if (skippedByMain): return
+				if (bot.monsters.keys().size() == 0):
+					break
 

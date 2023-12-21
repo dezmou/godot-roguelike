@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbikv7tfe4saw"]
+
+[ext_resource type="PackedScene" uid="uid://bqaxu668bw6mt" path="res://monsters/monster.tscn" id="1_eocpj"]
+[ext_resource type="Script" path="res://monsters/totem/totem.gd" id="2_m53pc"]
+[ext_resource type="Texture2D" uid="uid://bf01oy0jglom5" path="res://art/totem_red.png" id="3_7homg"]
+
+[node name="Monster" instance=ExtResource("1_eocpj")]
+script = ExtResource("2_m53pc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="3"]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("3_7homg")
