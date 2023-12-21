@@ -1,5 +1,5 @@
 # Test of a Game mechanic
-## try it [here](https://eth-storage.com)
+## try it [here](https://battle.modez.pro/)
 
 Mobile or desktop
 
