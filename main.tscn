@@ -37,19 +37,54 @@ color = Color(0.823529, 0.823529, 0.823529, 1)
 
 [node name="NewGame" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 512.0
+offset_left = 528.0
 offset_right = 602.0
-offset_bottom = 88.0
-text = "New game"
+offset_bottom = 72.0
+text = "New 
+Game"
 
 [node name="Cheat" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 512.0
-offset_top = 96.0
+offset_left = 528.0
+offset_top = 80.0
 offset_right = 600.0
-offset_bottom = 184.0
+offset_bottom = 152.0
 text = "Cheat
 $$$"
+
+[node name="Add1" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 448.0
+offset_right = 216.0
+offset_bottom = 544.0
+text = "Add 1
+$15"
+
+[node name="Add5" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 448.0
+offset_right = 328.0
+offset_bottom = 544.0
+text = "Add 5
+$15"
+
+[node name="Add10" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 448.0
+offset_right = 440.0
+offset_bottom = 544.0
+text = "Add 15
+$30"
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_top = 448.0
+offset_right = 96.0
+offset_bottom = 544.0
+text = "infos"
 
 [node name="InfoModal" type="Control" parent="."]
 visible = false

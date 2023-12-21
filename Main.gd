@@ -7,9 +7,11 @@ const Knife = preload("res://monsters/knife/knife.tscn")
 const Flame = preload("res://monsters/flame/flame.tscn")
 const Bomb = preload("res://monsters/bomb/bomb.tscn")
 
-const Column = preload("res://column.tscn")
+#const Column = preload("res://column.tscn")
+const Item = preload("res://Item.tscn")
 
-var columns : Array[Control] = [];
+var items : Array[Control] = [];
+var selectedItemIndex := 0
 
 const monsters := {
 	"knife" : Knife,
@@ -80,8 +82,8 @@ func spawnMonster(_player : Player, Monster : PackedScene):
 
 func updateGold(player):
 	$GoldLabel.text = "$" + str(int(player.gold))
-	for column in columns:
-		column.checkGold()
+	#for column in columns:
+		#column.checkGold()
 
 func calculateGold():
 	updateGold(players[YOU])
@@ -90,13 +92,6 @@ func handleWaves():
 	$InfoModal.get_node("goButton").pressed.connect(func():
 		$Levels.onModalClosed()
 	)
-	#$Levels.init()
-	#for wave in waves:
-		#await get_tree().create_timer(wave["wait"]).timeout
-		#for monsterBloc in wave["monsters"]:
-			#for i in monsterBloc["nbr"]:
-				#players[BOT].spawnQueue[monsterBloc["type"]] += 1
-		
 
 func updateHudNumber():
 	var nbr = players[YOU].nbrMonster
@@ -127,12 +122,23 @@ func processQueue(player):
 
 func createShop():
 	var index = -1
-	for monster in [Knife, Flame, Bomb]:
+	for Monster in [Knife, Flame, Bomb]:
 		index += 1
-		var column = Column.instantiate()
-		$Control.add_child(column)
-		column.init(monster, index)
-		columns.append(column)
+		var monster = Monster.instantiate()
+		var item = Item.instantiate()
+		$Control.add_child(item)
+		item.get_node("Texture").texture = monster.infos["card"]["image"]
+		item.get_node("Selected").visible = true
+		item.position.x = float(index) * item.size.x
+		items.append(item)
+		item.get_node("Button").pressed.connect(func():
+			selectedItemIndex = index
+			for it in items:
+				it.get_node("Color").color = Color(1,1,1)
+			item.get_node("Color").color = Color(0.8,0.2,0.2)
+			
+			pass
+		)
 
 func _ready():
 	setInterval(0.2, calculateGold)

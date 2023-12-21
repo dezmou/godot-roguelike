@@ -112,8 +112,8 @@ func findNearestEnnemy():
 func getGoForce():
 	if (currentTargetPosition):
 		var force = position.direction_to(currentTargetPosition) * BASE_SPEED
-		if position.distance_to(currentTargetPosition) < 50:
-			force *= 2
+		if position.distance_to(currentTargetPosition) < 10:
+			force *= 8
 		var center = Vector2(300,500)
 		force += position.direction_to(center) * TO_CENTER_FORCE;
 		return force * speed

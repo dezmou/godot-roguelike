@@ -17,13 +17,13 @@ func init(player, _position :Vector2, target : Vector2):
 	else:
 		set_collision_mask_value(1,true)
 	position = _position
-	var force = position.direction_to(target) * 700
+	var force = position.direction_to(target) * 900
 	apply_central_impulse(force)
 	contact_monitor = true
 	max_contacts_reported = 1
 	body_entered.connect(_onMeet)
 
-	await get_tree().create_timer(0.35).timeout
+	await get_tree().create_timer(0.28).timeout
 	queue_free()
 
 # Called when the node enters the scene tree for the first time.

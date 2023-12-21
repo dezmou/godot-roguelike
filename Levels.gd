@@ -210,7 +210,7 @@ func launchLevel():
 				you.gold += 69420.0
 				return win()
 
-
+	
 
 	if levelIndex == 7:
 		bot.maxMonster = 40

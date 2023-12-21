@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://cprepsyfblt4l"]
+
+[ext_resource type="Texture2D" uid="uid://r1xioc2m0470" path="res://art/bomb_card.png" id="1_tnp85"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchor_right = 0.213
+anchor_bottom = 0.116
+offset_right = 0.199989
+offset_bottom = 0.399994
+grow_vertical = 2
+
+[node name="Selected" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 120.0
+
+[node name="Color" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+mouse_filter = 2
+
+[node name="Texture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 120.0
+mouse_filter = 2
+texture = ExtResource("1_tnp85")
+expand_mode = 1
