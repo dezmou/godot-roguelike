@@ -60,16 +60,20 @@ take care of it
 5 :"""
 Noice
 
-You won $150
+You won $300
+
+Use your talent to won with battle with your competences
 
 """,
 
 6 :"""
 You finished the tutorial
 
-Level 1 
+Now try to survive in this endless battle
 
-Objective : Reach 1000 gold
+Objective : reach 1000 gold 
+
+
 
 
 """
@@ -117,6 +121,7 @@ func launchLevel():
 			if (skippedByMain): return
 			if (bot.monsters.keys().size() == 0):
 				await get_tree().create_timer(1.5).timeout
+				you.gold += 100.0
 				return win()
 
 
@@ -171,7 +176,7 @@ func launchLevel():
 			if (skippedByMain): return
 			if (bot.monsters.keys().size() == 0):
 				await get_tree().create_timer(1.5).timeout
-				you.gold += 150.0
+				you.gold += 300.0
 				return win()
 
 	if levelIndex == 5:
@@ -197,7 +202,6 @@ func launchLevel():
 			if (skippedByMain): return
 			if (bot.monsters.keys().size() == 0):
 				await get_tree().create_timer(1.5).timeout
-				you.gold += 69420.0
 				return win()
 
 	
